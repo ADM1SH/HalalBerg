@@ -1,0 +1,24 @@
+# Environments
+.env
+backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+ENV/
+env/
+
+# Databases
+db.sqlite3
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+.kilo/node_modules/
+.kilo/package-lock.json

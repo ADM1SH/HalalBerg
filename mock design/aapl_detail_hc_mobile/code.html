@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QUANTUM TERMINAL - AAPL</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#000000",
+                    "outline-variant": "#00FFFF",
+                    "on-secondary-fixed": "#FFFFFF",
+                    "on-primary-fixed": "#FFFFFF",
+                    "primary": "#FFFFFF",
+                    "primary-fixed-dim": "#FFFFFF",
+                    "on-tertiary-fixed-variant": "#FFFFFF",
+                    "inverse-on-surface": "#000000",
+                    "surface-container": "#000000",
+                    "tertiary": "#FFFFFF",
+                    "surface-tint": "#000000",
+                    "surface-dim": "#000000",
+                    "surface-bright": "#000000",
+                    "secondary-fixed-dim": "#FFFFFF",
+                    "surface-container-highest": "#000000",
+                    "secondary-container": "#000000",
+                    "on-surface-variant": "#FFFFFF",
+                    "on-secondary-container": "#FFFFFF",
+                    "secondary-fixed": "#FFFFFF",
+                    "secondary": "#FFFFFF",
+                    "on-tertiary-fixed": "#000000",
+                    "on-primary-fixed-variant": "#FFFFFF",
+                    "on-tertiary": "#000000",
+                    "on-error": "#FFFFFF",
+                    "primary-fixed": "#FFFFFF",
+                    "tertiary-container": "#000000",
+                    "on-error-container": "#FFFFFF",
+                    "surface": "#000000",
+                    "tertiary-fixed-dim": "#FFFFFF",
+                    "primary-container": "#000000",
+                    "on-secondary-fixed-variant": "#FFFFFF",
+                    "surface-variant": "#000000",
+                    "outline": "#00FFFF",
+                    "on-surface": "#FFFFFF",
+                    "surface-container-lowest": "#000000",
+                    "on-secondary": "#000000",
+                    "on-background": "#FFFFFF",
+                    "background": "#000000",
+                    "surface-container-high": "#000000",
+                    "error": "#FFFFFF",
+                    "tertiary-fixed": "#FFFFFF",
+                    "error-container": "#000000",
+                    "inverse-primary": "#FFFFFF",
+                    "inverse-surface": "#FFFFFF",
+                    "on-tertiary-container": "#FFFFFF",
+                    "on-primary-container": "#FFFFFF",
+                    "surface-container-low": "#000000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "0px"
+            },
+            "spacing": {
+                    "stack-default": "12px",
+                    "gutter": "1px",
+                    "container-padding": "8px",
+                    "edge-margin": "0px",
+                    "unit": "4px",
+                    "stack-compact": "4px"
+            },
+            "fontFamily": {
+                    "label-xs": ["JetBrains Mono", "monospace"],
+                    "data-tabular": ["JetBrains Mono", "monospace"],
+                    "headline-md": ["JetBrains Mono", "monospace"],
+                    "ticker-sm": ["JetBrains Mono", "monospace"],
+                    "display-lg": ["JetBrains Mono", "monospace"],
+                    "body-sm": ["JetBrains Mono", "monospace"]
+            },
+            "fontSize": {
+                    "label-xs": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "data-tabular": ["13px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "ticker-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "display-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom ultra-thin scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00FFFF;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00FFFF;
+        }
+        
+        /* Candlestick specific utilities to enforce style guidance colors if not strictly in theme names */
+        .candle-bull { fill: #000000; stroke: #00FFFF; stroke-width: 1px; }
+        .candle-bear { fill: #00FFFF; stroke: #00FFFF; stroke-width: 1px; }
+        .grid-line { stroke: #00FFFF; stroke-width: 1px; stroke-opacity: 0.3; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface h-screen flex flex-col font-body-sm overflow-hidden antialiased">
+<!-- TopAppBar (Adapted for Mobile / Search) -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-container-padding h-12 shrink-0 z-10">
+<!-- Command Input Style Search -->
+<div class="flex-1 flex items-center bg-surface border border-outline-variant px-2 h-8 mr-4">
+<span class="font-ticker-sm text-ticker-sm text-primary mr-2">/</span>
+<input class="bg-transparent border-none focus:ring-0 p-0 font-ticker-sm text-ticker-sm text-primary w-full uppercase" placeholder="TICKER..." type="text" value="AAPL"/>
+</div>
+<div class="flex items-center gap-stack-default text-primary">
+<button class="hover:bg-outline-variant hover:text-black transition-colors p-1 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas (Bento Grid Style via gap-gutter) -->
+<main class="flex-1 overflow-y-auto bg-outline-variant flex flex-col gap-gutter pb-16">
+<!-- Header Panel -->
+<section class="bg-surface p-container-padding flex justify-between items-end">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface m-0 leading-none">AAPL</h1>
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase mt-1">Apple Inc. • NASDAQ</p>
+</div>
+<div class="text-right">
+<div class="font-display-lg text-display-lg text-on-surface m-0 leading-none">175.43</div>
+<div class="font-label-xs text-label-xs text-tertiary mt-1 flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_upward" style="font-variation-settings: 'FILL' 1;">arrow_upward</span>
+                    +2.14 (+1.23%)
+                </div>
+</div>
+</section>
+<!-- Chart Panel -->
+<section class="bg-surface flex flex-col">
+<!-- Timeframe selector -->
+<div class="flex border-b border-outline-variant">
+<button class="flex-1 py-2 font-label-xs text-label-xs text-on-surface-variant hover:bg-outline-variant hover:text-black transition-colors">1D</button>
+<button class="flex-1 py-2 font-label-xs text-label-xs text-on-surface-variant hover:bg-outline-variant hover:text-black transition-colors">1W</button>
+<button class="flex-1 py-2 font-label-xs text-label-xs text-primary border-b border-outline-variant bg-surface transition-colors">1M</button>
+<button class="flex-1 py-2 font-label-xs text-label-xs text-on-surface-variant hover:bg-outline-variant hover:text-black transition-colors">3M</button>
+<button class="flex-1 py-2 font-label-xs text-label-xs text-on-surface-variant hover:bg-outline-variant hover:text-black transition-colors">1Y</button>
+<button class="flex-1 py-2 font-label-xs text-label-xs text-on-surface-variant hover:bg-outline-variant hover:text-black transition-colors">ALL</button>
+</div>
+<!-- Candlestick Chart Area (Abstracted with SVG) -->
+<div class="h-48 w-full relative p-container-padding">
+<svg class="absolute inset-0 z-0" height="100%" preserveaspectratio="none" viewbox="0 0 300 150" width="100%">
+<!-- Grid Lines -->
+<line class="grid-line stroke-dasharray-[2,2]" x1="0" x2="300" y1="25" y2="25"></line>
+<line class="grid-line stroke-dasharray-[2,2]" x1="0" x2="300" y1="75" y2="75"></line>
+<line class="grid-line stroke-dasharray-[2,2]" x1="0" x2="300" y1="125" y2="125"></line>
+<!-- Candles -->
+<g transform="translate(10, 0)">
+<line class="candle-bear" x1="5" x2="5" y1="90" y2="130"></line>
+<rect class="candle-bear" height="20" width="6" x="2" y="100"></rect>
+</g>
+<g transform="translate(30, 0)">
+<line class="candle-bull" x1="5" x2="5" y1="70" y2="110"></line>
+<rect class="candle-bull" height="25" width="6" x="2" y="75"></rect>
+</g>
+<g transform="translate(50, 0)">
+<line class="candle-bull" x1="5" x2="5" y1="50" y2="85"></line>
+<rect class="candle-bull" height="20" width="6" x="2" y="55"></rect>
+</g>
+<g transform="translate(70, 0)">
+<line class="candle-bear" x1="5" x2="5" y1="40" y2="65"></line>
+<rect class="candle-bear" height="15" width="6" x="2" y="45"></rect>
+</g>
+<g transform="translate(90, 0)">
+<line class="candle-bull" x1="5" x2="5" y1="20" y2="55"></line>
+<rect class="candle-bull" height="20" width="6" x="2" y="25"></rect>
+</g>
+<g transform="translate(110, 0)">
+<line class="candle-bull" x1="5" x2="5" y1="15" y2="45"></line>
+<rect class="candle-bull" height="15" width="6" x="2" y="20"></rect>
+</g>
+<g transform="translate(130, 0)">
+<line class="candle-bear" x1="5" x2="5" y1="25" y2="50"></line>
+<rect class="candle-bear" height="10" width="6" x="2" y="30"></rect>
+</g>
+<g transform="translate(150, 0)">
+<line class="candle-bear" x1="5" x2="5" y1="35" y2="60"></line>
+<rect class="candle-bear" height="15" width="6" x="2" y="40"></rect>
+</g>
+<g transform="translate(170, 0)">
+<line class="candle-bull" x1="5" x2="5" y1="10" y2="45"></line>
+<rect class="candle-bull" height="20" width="6" x="2" y="15"></rect>
+</g>
+</svg>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-2 gap-gutter bg-outline-variant border-t border-outline-variant">
+<button class="bg-surface py-3 font-ticker-sm text-ticker-sm text-on-surface hover:bg-outline-variant hover:text-black transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span> BUY
+                </button>
+<button class="bg-surface py-3 font-ticker-sm text-ticker-sm text-on-surface hover:bg-outline-variant hover:text-black transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="remove">remove</span> SELL
+                </button>
+</div>
+</section>
+<!-- Fundamentals Panel -->
+<section class="bg-surface flex flex-col">
+<div class="px-container-padding py-2 border-b border-outline-variant">
+<h2 class="font-label-xs text-label-xs text-on-surface-variant uppercase">Key Ratios</h2>
+</div>
+<div class="grid grid-cols-2 gap-gutter bg-outline-variant">
+<div class="bg-surface p-container-padding flex flex-col gap-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Market Cap</span>
+<span class="font-data-tabular text-data-tabular text-on-surface">2.73T</span>
+</div>
+<div class="bg-surface p-container-padding flex flex-col gap-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">P/E Ratio</span>
+<span class="font-data-tabular text-data-tabular text-on-surface">28.45</span>
+</div>
+<div class="bg-surface p-container-padding flex flex-col gap-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">EPS (TTM)</span>
+<span class="font-data-tabular text-data-tabular text-on-surface">6.16</span>
+</div>
+<div class="bg-surface p-container-padding flex flex-col gap-1">
+<span class="font-label-xs text-label-xs text-on-surface-variant uppercase">Div Yield</span>
+<span class="font-data-tabular text-data-tabular text-on-surface">0.55%</span>
+</div>
+</div>
+</section>
+<!-- News Feed Panel -->
+<section class="bg-surface flex flex-col min-h-[300px]">
+<div class="px-container-padding py-2 border-b border-outline-variant">
+<h2 class="font-label-xs text-label-xs text-on-surface-variant uppercase">Terminal Feed</h2>
+</div>
+<div class="flex flex-col">
+<!-- News Item 1 -->
+<article class="p-container-padding border-b border-outline-variant hover:bg-outline-variant hover:text-black transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1 gap-2">
+<span class="font-label-xs text-label-xs text-primary bg-surface border border-outline-variant px-1 group-hover:bg-black group-hover:text-white">RTRS</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant whitespace-nowrap group-hover:text-black">10:42 AM</span>
+</div>
+<h3 class="font-body-sm text-body-sm text-on-surface leading-tight group-hover:text-black">Apple Vision Pro faces supply chain constraints amidst higher than expected enterprise demand.</h3>
+</article>
+<!-- News Item 2 -->
+<article class="p-container-padding border-b border-outline-variant hover:bg-outline-variant hover:text-black transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1 gap-2">
+<span class="font-label-xs text-label-xs text-primary bg-surface border border-outline-variant px-1 group-hover:bg-black group-hover:text-white">BBG</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant whitespace-nowrap group-hover:text-black">09:15 AM</span>
+</div>
+<h3 class="font-body-sm text-body-sm text-on-surface leading-tight group-hover:text-black">Analyst Upgrade: AAPL target raised to $210 citing robust services revenue growth.</h3>
+</article>
+<!-- News Item 3 -->
+<article class="p-container-padding border-b border-outline-variant hover:bg-outline-variant hover:text-black transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1 gap-2">
+<span class="font-label-xs text-label-xs text-primary bg-surface border border-outline-variant px-1 group-hover:bg-black group-hover:text-white">WSJ</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant whitespace-nowrap group-hover:text-black">YESTERDAY</span>
+</div>
+<h3 class="font-body-sm text-body-sm text-on-surface leading-tight group-hover:text-black">DOJ antitrust probe expands into Apple's App Store payment processing mechanisms.</h3>
+</article>
+<!-- News Item 4 -->
+<article class="p-container-padding border-b border-outline-variant hover:bg-outline-variant hover:text-black transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1 gap-2">
+<span class="font-label-xs text-label-xs text-primary bg-surface border border-outline-variant px-1 group-hover:bg-black group-hover:text-white">RTRS</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant whitespace-nowrap group-hover:text-black">YESTERDAY</span>
+</div>
+<h3 class="font-body-sm text-body-sm text-on-surface leading-tight group-hover:text-black">Foxconn reports 12% revenue increase, heavily driven by strong iPhone 15 Pro Max orders.</h3>
+</article>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Adapted from SideNavBar JSON for mobile) -->
+<nav class="fixed bottom-0 w-full bg-surface border-t border-outline-variant flex justify-around items-center h-16 z-50 px-container-padding">
+<button class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-all duration-75 gap-1">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-xs text-label-xs">Dashboard</span>
+</button>
+<!-- Active Tab: Markets (Best fit for a stock detail view) -->
+<button class="flex flex-col items-center justify-center w-full h-full text-primary transition-all duration-75 gap-1 border-t-2 border-outline-variant mt-[-2px]">
+<span class="material-symbols-outlined" data-icon="show_chart" style="font-variation-settings: 'FILL' 1;">show_chart</span>
+<span class="font-label-xs text-label-xs">Markets</span>
+</button>
+<button class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-all duration-75 gap-1">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-xs text-label-xs">Portfolio</span>
+</button>
+<button class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-all duration-75 gap-1">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-xs text-label-xs">Analytics</span>
+</button>
+<button class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-all duration-75 gap-1">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-xs text-label-xs">History</span>
+</button>
+</nav>
+</body></html>

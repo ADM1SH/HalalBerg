@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PORT - Portfolio &amp; Zakat Manager</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#000000",
+                        "on-surface": "#FFFFFF",
+                        "error": "#ffb4ab",
+                        "tertiary": "#00FFFF",
+                        "on-secondary-fixed-variant": "#44474d",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#000000",
+                        "on-surface-variant": "#FFFFFF",
+                        "primary-fixed-dim": "#FFFFFF",
+                        "surface-dim": "#000000",
+                        "surface-container-high": "#000000",
+                        "surface-tint": "#000000",
+                        "inverse-on-surface": "#FFFFFF",
+                        "error-container": "#93000a",
+                        "primary-container": "#000000",
+                        "surface-container": "#000000",
+                        "secondary-container": "#000000",
+                        "on-tertiary-fixed": "#000000",
+                        "on-tertiary": "#000000",
+                        "tertiary-container": "#00FFFF",
+                        "secondary-fixed": "#00FFFF",
+                        "on-primary-fixed": "#000000",
+                        "primary-fixed": "#00FFFF",
+                        "background": "#000000",
+                        "surface-container-lowest": "#000000",
+                        "secondary": "#00FFFF",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#00FFFF",
+                        "on-primary-fixed-variant": "#000000",
+                        "surface-bright": "#000000",
+                        "tertiary-fixed-dim": "#00FFFF",
+                        "outline-variant": "#00FFFF",
+                        "on-tertiary-container": "#000000",
+                        "outline": "#00FFFF",
+                        "inverse-surface": "#000000",
+                        "surface-container-highest": "#000000",
+                        "primary": "#00FFFF",
+                        "secondary-fixed-dim": "#00FFFF",
+                        "on-primary": "#000000",
+                        "on-tertiary-fixed-variant": "#000000",
+                        "surface-container-low": "#000000",
+                        "on-secondary": "#000000",
+                        "on-primary-container": "#FFFFFF",
+                        "on-background": "#FFFFFF",
+                        "inverse-primary": "#00FFFF",
+                        "on-secondary-fixed": "#000000",
+                        "on-secondary-container": "#FFFFFF"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    spacing: {
+                        "container-padding": "8px",
+                        "unit": "4px",
+                        "stack-default": "12px",
+                        "gutter": "1px",
+                        "stack-compact": "4px",
+                        "edge-margin": "0px"
+                    },
+                    fontFamily: {
+                        "label-xs": ["JetBrains Mono"],
+                        "display-lg": ["JetBrains Mono"],
+                        "headline-md": ["JetBrains Mono"],
+                        "ticker-sm": ["JetBrains Mono"],
+                        "data-tabular": ["JetBrains Mono"],
+                        "body-sm": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "label-xs": ["11px", { lineHeight: "14px", fontWeight: "500" }],
+                        "display-lg": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "headline-md": ["18px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "ticker-sm": ["12px", { lineHeight: "16px", fontWeight: "700" }],
+                        "data-tabular": ["13px", { lineHeight: "16px", fontWeight: "500" }],
+                        "body-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        /* Ultra-thin custom scrollbar */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: theme('colors.surface'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.outline'); }
+        .bento-grid { display: flex; flex-direction: column; gap: theme('spacing.stack-default'); background-color: theme('colors.background'); padding-bottom: 60px; padding: 12px;}
+        .bento-item { background-color: theme('colors.surface'); padding: theme('spacing.container-padding'); border: 1px solid theme('colors.outline'); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-sm text-body-sm h-screen overflow-y-auto">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-container-padding h-12 w-full z-50 bg-surface border-b border-outline sticky top-0">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary font-headline-md text-headline-md">terminal</span>
+<h1 class="font-display-lg text-display-lg font-bold text-on-surface tracking-tighter">PORT</h1>
+</div>
+<button class="hover:bg-surface-container-high transition-colors duration-75 active:bg-surface-variant p-1 rounded-none border border-transparent hover:border-outline">
+<span class="material-symbols-outlined text-primary">search</span>
+</button>
+</header>
+<main class="bento-grid min-h-screen">
+<!-- Portfolio Summary -->
+<section class="bento-item flex flex-col gap-stack-default">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-label-xs text-label-xs text-on-surface uppercase">Total Value</h2>
+<div class="font-display-lg text-display-lg text-on-surface">$142,580.00</div>
+</div>
+<div class="text-right">
+<h2 class="font-label-xs text-label-xs text-on-surface uppercase">Daily P&amp;L</h2>
+<div class="font-ticker-sm text-ticker-sm text-tertiary">+1.2%</div>
+</div>
+</div>
+<div class="h-px bg-outline w-full my-stack-compact"></div>
+<div class="flex items-center justify-between">
+<div class="flex-1">
+<h3 class="font-label-xs text-label-xs text-on-surface mb-2">Asset Allocation</h3>
+<ul class="flex flex-col gap-1">
+<li class="flex justify-between items-center"><span class="flex items-center gap-1 before:content-[''] before:block before:w-2 before:h-2 before:bg-primary"><span class="font-data-tabular text-data-tabular">Equities</span></span><span class="font-ticker-sm text-ticker-sm text-on-surface">65%</span></li>
+<li class="flex justify-between items-center"><span class="flex items-center gap-1 before:content-[''] before:block before:w-2 before:h-2 before:bg-secondary"><span class="font-data-tabular text-data-tabular">Cash</span></span><span class="font-ticker-sm text-ticker-sm text-on-surface">25%</span></li>
+<li class="flex justify-between items-center"><span class="flex items-center gap-1 before:content-[''] before:block before:w-2 before:h-2 before:bg-tertiary"><span class="font-data-tabular text-data-tabular">Gold</span></span><span class="font-ticker-sm text-ticker-sm text-on-surface">10%</span></li>
+</ul>
+</div>
+<div class="w-20 h-20 rounded-none border border-outline relative flex items-center justify-center bg-surface">
+<!-- CSS Donut approximation -->
+<div class="absolute inset-0 rounded-none border border-primary m-1" style="clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 50%);"></div>
+<div class="absolute inset-0 rounded-none border border-secondary m-1" style="clip-path: polygon(50% 50%, 0 50%, 0 0, 50% 0);"></div>
+<div class="absolute inset-0 rounded-none border border-tertiary m-1" style="clip-path: polygon(50% 50%, 50% 0, 100% 0);"></div>
+<div class="w-12 h-12 bg-surface border border-outline rounded-none z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[16px]">pie_chart</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Zakat Calculator Panel -->
+<section class="bento-item flex flex-col gap-stack-default">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">calculate</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Zakat Calculator</h2>
+</div>
+<div class="grid grid-cols-2 gap-gutter bg-outline border border-outline p-[1px]">
+<div class="bg-surface p-2 flex flex-col items-center">
+<span class="font-label-xs text-label-xs text-on-surface uppercase">Gold / oz</span>
+<span class="font-ticker-sm text-ticker-sm text-on-surface">$2,050.40</span>
+</div>
+<div class="bg-surface p-2 flex flex-col items-center">
+<span class="font-label-xs text-label-xs text-on-surface uppercase">Silver / oz</span>
+<span class="font-ticker-sm text-ticker-sm text-on-surface">$22.80</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 border border-outline p-2 bg-surface">
+<div class="flex justify-between">
+<span class="font-data-tabular text-data-tabular text-on-surface">Zakatable Assets</span>
+<span class="font-ticker-sm text-ticker-sm text-on-surface">$106,935.00</span>
+</div>
+<div class="flex justify-between">
+<span class="font-data-tabular text-data-tabular text-on-surface">Nisab Threshold (Gold)</span>
+<span class="font-ticker-sm text-ticker-sm text-on-surface">$6,005.00</span>
+</div>
+<div class="h-px bg-outline my-1"></div>
+<div class="flex justify-between items-center">
+<span class="font-data-tabular text-data-tabular text-primary">Obligation (2.5%)</span>
+<span class="font-ticker-sm text-ticker-sm text-primary text-base">$2,673.37</span>
+</div>
+</div>
+<button class="w-full bg-surface text-primary border border-primary py-2 font-data-tabular text-data-tabular uppercase tracking-wider hover:bg-primary hover:text-on-primary active:bg-surface transition-colors rounded-none">
+                Record Payment
+            </button>
+</section>
+<!-- Command Input / CLI -->
+<section class="bento-item flex items-center border border-outline mt-auto mb-14">
+<span class="font-ticker-sm text-ticker-sm text-primary mr-2">&gt;</span>
+<input class="bg-transparent border-none text-on-surface font-ticker-sm text-ticker-sm focus:ring-0 w-full p-0 placeholder:text-outline" placeholder="/command" type="text"/>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="flex justify-around items-center h-14 w-full bg-surface fixed bottom-0 z-50 border-t border-outline md:hidden">
+<!-- Dashboard (Active) -->
+<button class="flex flex-col items-center justify-center text-tertiary bg-surface-container w-full h-full border-r border-outline active:bg-surface transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+<span class="font-label-xs text-label-xs mt-1">Watchlist</span>
+</button>
+<!-- Charts -->
+<button class="flex flex-col items-center justify-center text-on-surface w-full h-full border-r border-outline active:bg-surface transition-colors hover:text-primary">
+<span class="material-symbols-outlined">candlestick_chart</span>
+<span class="font-label-xs text-label-xs mt-1">Charts</span>
+</button>
+<!-- Screener -->
+<button class="flex flex-col items-center justify-center text-on-surface w-full h-full border-r border-outline active:bg-surface transition-colors hover:text-primary">
+<span class="material-symbols-outlined">filter_alt</span>
+<span class="font-label-xs text-label-xs mt-1">Screener</span>
+</button>
+<!-- News -->
+<button class="flex flex-col items-center justify-center text-on-surface w-full h-full active:bg-surface transition-colors hover:text-primary">
+<span class="material-symbols-outlined">newspaper</span>
+<span class="font-label-xs text-label-xs mt-1">News</span>
+</button>
+</nav>
+</body></html>

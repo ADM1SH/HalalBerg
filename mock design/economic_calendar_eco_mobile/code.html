@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Economic Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#273647",
+                        "on-surface": "#d4e4fa",
+                        "error": "#ffb4ab",
+                        "tertiary": "#4ae176",
+                        "on-secondary-fixed-variant": "#44474d",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#051424",
+                        "on-surface-variant": "#c6c6ca",
+                        "primary-fixed-dim": "#c6c6ca",
+                        "surface-dim": "#051424",
+                        "surface-container-high": "#1c2b3c",
+                        "surface-tint": "#c6c6ca",
+                        "inverse-on-surface": "#233143",
+                        "error-container": "#93000a",
+                        "primary-container": "#121417",
+                        "surface-container": "#122131",
+                        "secondary-container": "#464950",
+                        "on-tertiary-fixed": "#002109",
+                        "on-tertiary": "#003915",
+                        "tertiary-container": "#001906",
+                        "secondary-fixed": "#e1e2ea",
+                        "on-primary-fixed": "#1a1c1f",
+                        "primary-fixed": "#e2e2e6",
+                        "background": "#051424",
+                        "surface-container-lowest": "#010f1f",
+                        "secondary": "#c4c6ce",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#6bff8f",
+                        "on-primary-fixed-variant": "#45474a",
+                        "surface-bright": "#2c3a4c",
+                        "tertiary-fixed-dim": "#4ae176",
+                        "outline-variant": "#45474a",
+                        "on-tertiary-container": "#009241",
+                        "outline": "#8f9094",
+                        "inverse-surface": "#d4e4fa",
+                        "surface-container-highest": "#273647",
+                        "primary": "#c6c6ca",
+                        "secondary-fixed-dim": "#c4c6ce",
+                        "on-primary": "#2f3034",
+                        "on-tertiary-fixed-variant": "#005321",
+                        "surface-container-low": "#0d1c2d",
+                        "on-secondary": "#2d3037",
+                        "on-primary-container": "#7d7e82",
+                        "on-background": "#d4e4fa",
+                        "inverse-primary": "#5d5e62",
+                        "on-secondary-fixed": "#191c22",
+                        "on-secondary-container": "#b6b8c0",
+                        "bullish": "#22C55E",
+                        "bearish": "#EF4444"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding": "8px",
+                        "unit": "4px",
+                        "stack-default": "12px",
+                        "gutter": "1px",
+                        "stack-compact": "4px",
+                        "edge-margin": "0px"
+                    },
+                    "fontFamily": {
+                        "label-xs": ["JetBrains Mono"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "ticker-sm": ["JetBrains Mono"],
+                        "data-tabular": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-xs": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "display-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "ticker-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "data-tabular": ["13px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #051424;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #273647;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #45474a;
+        }
+        /* Marquee animation */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-sm h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary font-headline-md text-headline-md w-full top-0 border-b border-outline-variant transition-colors duration-75 active:bg-surface-variant flex items-center justify-between px-container-padding h-12 w-full z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-display-lg text-display-lg font-bold text-on-surface tracking-tighter">TERMINAL</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined hover:bg-surface-container-high rounded p-1 cursor-pointer" data-icon="search">search</span>
+</div>
+</header>
+<!-- Macro Ticker Tape -->
+<div class="w-full bg-surface-container-high border-b border-outline-variant h-6 overflow-hidden flex items-center relative z-40">
+<div class="flex whitespace-nowrap animate-marquee font-ticker-sm text-ticker-sm">
+<div class="flex items-center gap-6 px-4">
+<span class="text-on-surface-variant">GOLD</span><span class="text-on-surface">2,024.50</span><span class="text-bullish">+0.45%</span>
+<span class="text-on-surface-variant">CL=F</span><span class="text-on-surface">78.32</span><span class="text-bearish">-1.20%</span>
+<span class="text-on-surface-variant">DXY</span><span class="text-on-surface">103.85</span><span class="text-bullish">+0.12%</span>
+<span class="text-on-surface-variant">US10Y</span><span class="text-on-surface">4.215</span><span class="text-bearish">-0.034</span>
+<span class="text-on-surface-variant">BTC=F</span><span class="text-on-surface">51,430</span><span class="text-bullish">+2.1%</span>
+</div>
+<div class="flex items-center gap-6 px-4">
+<span class="text-on-surface-variant">GOLD</span><span class="text-on-surface">2,024.50</span><span class="text-bullish">+0.45%</span>
+<span class="text-on-surface-variant">CL=F</span><span class="text-on-surface">78.32</span><span class="text-bearish">-1.20%</span>
+<span class="text-on-surface-variant">DXY</span><span class="text-on-surface">103.85</span><span class="text-bullish">+0.12%</span>
+<span class="text-on-surface-variant">US10Y</span><span class="text-on-surface">4.215</span><span class="text-bearish">-0.034</span>
+<span class="text-on-surface-variant">BTC=F</span><span class="text-on-surface">51,430</span><span class="text-bullish">+2.1%</span>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto pb-14 bg-background">
+<!-- Controls Header -->
+<div class="sticky top-0 bg-background z-30 border-b border-outline-variant">
+<div class="flex items-center justify-between px-container-padding py-2">
+<div class="font-headline-md text-headline-md text-on-surface">Economic Calendar</div>
+<div class="flex gap-2">
+<button class="bg-surface-container border border-outline-variant px-2 py-1 flex items-center gap-1 font-label-xs text-label-xs hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="filter_list">filter_list</span> Filters
+                    </button>
+<button class="bg-surface-container border border-outline-variant px-2 py-1 flex items-center gap-1 font-label-xs text-label-xs hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_month">calendar_month</span> Today
+                    </button>
+</div>
+</div>
+<!-- Table Headers -->
+<div class="flex items-center px-container-padding py-1 bg-surface-container-low border-t border-outline-variant font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">
+<div class="w-16">Time</div>
+<div class="w-8">Ccy</div>
+<div class="flex-1">Event</div>
+<div class="w-16 text-right">Act</div>
+<div class="w-16 text-right">Frcst</div>
+<div class="w-16 text-right">Prev</div>
+</div>
+</div>
+<!-- Data List -->
+<div class="flex flex-col font-data-tabular text-data-tabular">
+<!-- Date Divider -->
+<div class="bg-surface-container-highest px-container-padding py-1 font-label-xs text-label-xs text-on-surface sticky top-[80px] z-20 border-b border-outline-variant">
+                TODAY - FEB 22
+            </div>
+<!-- Event Row -->
+<div class="flex items-center px-container-padding py-2 border-b border-outline-variant bg-[#121417] hover:bg-surface-container-high transition-colors">
+<div class="w-16 text-on-surface-variant font-label-xs">08:30</div>
+<div class="w-8 text-on-surface flex items-center"><span class="w-2 h-2 rounded-full bg-error mr-1"></span>USD</div>
+<div class="flex-1 text-on-surface truncate pr-2">Initial Jobless Claims</div>
+<div class="w-16 text-right text-on-surface">201K</div>
+<div class="w-16 text-right text-on-surface-variant">218K</div>
+<div class="w-16 text-right text-on-surface-variant">213K</div>
+</div>
+<!-- Event Row -->
+<div class="flex items-center px-container-padding py-2 border-b border-outline-variant bg-[#1A1D23] hover:bg-surface-container-high transition-colors">
+<div class="w-16 text-on-surface-variant font-label-xs">08:30</div>
+<div class="w-8 text-on-surface flex items-center"><span class="w-2 h-2 rounded-full bg-tertiary mr-1"></span>USD</div>
+<div class="flex-1 text-on-surface truncate pr-2">Chicago Fed National Activity (Jan)</div>
+<div class="w-16 text-right text-bearish">-0.30</div>
+<div class="w-16 text-right text-on-surface-variant">-0.15</div>
+<div class="w-16 text-right text-on-surface-variant">-0.02</div>
+</div>
+<!-- Event Row -->
+<div class="flex items-center px-container-padding py-2 border-b border-outline-variant bg-[#121417] hover:bg-surface-container-high transition-colors">
+<div class="w-16 text-on-surface-variant font-label-xs">09:45</div>
+<div class="w-8 text-on-surface flex items-center"><span class="w-2 h-2 rounded-full bg-tertiary mr-1"></span>USD</div>
+<div class="flex-1 text-on-surface truncate pr-2">S&amp;P Global US Manufacturing PMI (Feb)</div>
+<div class="w-16 text-right text-bullish">51.5</div>
+<div class="w-16 text-right text-on-surface-variant">50.5</div>
+<div class="w-16 text-right text-on-surface-variant">50.7</div>
+</div>
+<!-- Event Row -->
+<div class="flex items-center px-container-padding py-2 border-b border-outline-variant bg-[#1A1D23] hover:bg-surface-container-high transition-colors">
+<div class="w-16 text-on-surface-variant font-label-xs">10:00</div>
+<div class="w-8 text-on-surface flex items-center"><span class="w-2 h-2 rounded-full bg-error mr-1"></span>USD</div>
+<div class="flex-1 text-on-surface truncate pr-2">Existing Home Sales (Jan)</div>
+<div class="w-16 text-right text-on-surface">4.00M</div>
+<div class="w-16 text-right text-on-surface-variant">3.97M</div>
+<div class="w-16 text-right text-on-surface-variant">3.88M</div>
+</div>
+<!-- Event Row -->
+<div class="flex items-center px-container-padding py-2 border-b border-outline-variant bg-[#121417] hover:bg-surface-container-high transition-colors">
+<div class="w-16 text-on-surface-variant font-label-xs">11:00</div>
+<div class="w-8 text-on-surface flex items-center"><span class="w-2 h-2 rounded-full bg-surface-variant mr-1"></span>USD</div>
+<div class="flex-1 text-on-surface truncate pr-2">EIA Crude Oil Inventories</div>
+<div class="w-16 text-right text-on-surface">3.51M</div>
+<div class="w-16 text-right text-on-surface-variant">3.90M</div>
+<div class="w-16 text-right text-on-surface-variant">12.02M</div>
+</div>
+<!-- Date Divider -->
+<div class="bg-surface-container-highest px-container-padding py-1 font-label-xs text-label-xs text-on-surface sticky top-[80px] z-20 border-b border-t border-outline-variant mt-2">
+                TOMORROW - FEB 23
+            </div>
+<!-- Event Row -->
+<div class="flex items-center px-container-padding py-2 border-b border-outline-variant bg-[#1A1D23] hover:bg-surface-container-high transition-colors opacity-70">
+<div class="w-16 text-on-surface-variant font-label-xs">04:00</div>
+<div class="w-8 text-on-surface flex items-center"><span class="w-2 h-2 rounded-full bg-tertiary mr-1"></span>EUR</div>
+<div class="flex-1 text-on-surface truncate pr-2">German Ifo Business Climate (Feb)</div>
+<div class="w-16 text-right text-on-surface">-</div>
+<div class="w-16 text-right text-on-surface-variant">85.5</div>
+<div class="w-16 text-right text-on-surface-variant">85.2</div>
+</div>
+<!-- Event Row -->
+<div class="flex items-center px-container-padding py-2 border-b border-outline-variant bg-[#121417] hover:bg-surface-container-high transition-colors opacity-70">
+<div class="w-16 text-on-surface-variant font-label-xs">13:30</div>
+<div class="w-8 text-on-surface flex items-center"><span class="w-2 h-2 rounded-full bg-error mr-1"></span>USD</div>
+<div class="flex-1 text-on-surface truncate pr-2">Fed Waller Speaks</div>
+<div class="w-16 text-right text-on-surface">-</div>
+<div class="w-16 text-right text-on-surface-variant">-</div>
+<div class="w-16 text-right text-on-surface-variant">-</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface dark:bg-surface text-primary dark:text-primary font-label-xs text-label-xs fixed bottom-0 w-full z-50 border-t border-outline-variant flex justify-around items-center h-14 w-full bg-surface">
+<a class="flex flex-col items-center justify-center text-on-surface-variant w-full h-full hover:bg-surface-container active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="list_alt">list_alt</span>
+<span class="font-ticker-sm text-ticker-sm">Watchlist</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant w-full h-full hover:bg-surface-container active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="candlestick_chart">candlestick_chart</span>
+<span class="font-ticker-sm text-ticker-sm">Charts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant w-full h-full hover:bg-surface-container active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="filter_alt">filter_alt</span>
+<span class="font-ticker-sm text-ticker-sm">Screener</span>
+</a>
+<a class="flex flex-col items-center justify-center text-tertiary bg-surface-container-highest w-full h-full active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="newspaper" data-weight="fill" style="font-variation-settings: 'FILL' 1;">newspaper</span>
+<span class="font-ticker-sm text-ticker-sm">News</span>
+</a>
+</nav>
+</body></html>

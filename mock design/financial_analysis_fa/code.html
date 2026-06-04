@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantum Terminal - Financial Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed": "#002109", "primary-container": "#121417", "tertiary-container": "#001906", "on-primary-fixed": "#1a1c1f", "tertiary": "#4ae176", "on-error-container": "#ffdad6", "surface-variant": "#273647", "outline": "#8f9094", "on-tertiary-container": "#009241", "primary-fixed-dim": "#c6c6ca", "primary-fixed": "#e2e2e6", "inverse-on-surface": "#233143", "on-secondary": "#2d3037", "surface-container-lowest": "#010f1f", "secondary-fixed-dim": "#c4c6ce", "inverse-surface": "#d4e4fa", "secondary": "#c4c6ce", "on-surface": "#d4e4fa", "on-primary": "#2f3034", "surface-container-low": "#0d1c2d", "background": "#051424", "error-container": "#93000a", "tertiary-fixed": "#6bff8f", "surface-container": "#122131", "on-secondary-fixed-variant": "#44474d", "error": "#ffb4ab", "secondary-fixed": "#e1e2ea", "surface-tint": "#c6c6ca", "outline-variant": "#45474a", "on-secondary-fixed": "#191c22", "on-error": "#690005", "secondary-container": "#464950", "on-primary-container": "#7d7e82", "on-tertiary": "#003915", "on-surface-variant": "#c6c6ca", "surface-container-high": "#1c2b3c", "on-tertiary-fixed-variant": "#005321", "surface": "#051424", "on-background": "#d4e4fa", "inverse-primary": "#5d5e62", "tertiary-fixed-dim": "#4ae176", "primary": "#c6c6ca", "on-secondary-container": "#b6b8c0", "on-primary-fixed-variant": "#45474a", "surface-bright": "#2c3a4c", "surface-dim": "#051424", "surface-container-highest": "#273647"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"
+                    },
+                    spacing: {
+                        unit: "4px", "stack-compact": "4px", gutter: "1px", "edge-margin": "0px", "stack-default": "12px", "container-padding": "8px"
+                    },
+                    fontFamily: {
+                        "label-xs": ["JetBrains Mono"], "headline-md": ["Inter"], "display-lg": ["Inter"], "body-sm": ["Inter"], "data-tabular": ["Inter"], "ticker-sm": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "label-xs": ["11px", { lineHeight: "14px", fontWeight: "500" }],
+                        "headline-md": ["18px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "display-lg": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "body-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+                        "data-tabular": ["13px", { lineHeight: "16px", fontWeight: "500" }],
+                        "ticker-sm": ["12px", { lineHeight: "16px", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Terminal custom scrollbar */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #051424; }
+        ::-webkit-scrollbar-thumb { background: #45474a; }
+        ::-webkit-scrollbar-thumb:hover { background: #8f9094; }
+        
+        /* Sticky header & column layers */
+        .sticky-top-left { z-index: 30; }
+        .sticky-top { z-index: 20; }
+        .sticky-left { z-index: 10; }
+    </style>
+</head>
+<body class="bg-background text-primary overflow-hidden h-screen flex flex-col font-body-sm">
+<!-- TopAppBar Shared Component -->
+<header class="bg-background dark:bg-background text-primary dark:text-primary docked full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center w-full px-spacing-stack-default h-12 z-50">
+<div class="flex items-center gap-6 h-full">
+<span class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface dark:text-on-surface">FIN-TERMINAL v2.4</span>
+<div class="flex items-center bg-surface-container-high border border-outline-variant px-2 h-7">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none text-ticker-sm font-ticker-sm text-on-surface focus:ring-0 p-0 w-32 placeholder-on-surface-variant" placeholder="/CMD" type="text"/>
+</div>
+<nav class="hidden md:flex h-full ml-4">
+<a class="h-full flex items-center px-4 text-on-surface-variant font-medium hover:bg-surface-variant dark:hover:bg-surface-variant hover:text-on-surface transition-colors" href="#">EQS</a>
+<a class="h-full flex items-center px-4 text-on-surface border-b-2 border-tertiary font-bold hover:bg-surface-variant dark:hover:bg-surface-variant hover:text-on-surface transition-colors opacity-80 duration-75" href="#">FA</a>
+<a class="h-full flex items-center px-4 text-on-surface-variant font-medium hover:bg-surface-variant dark:hover:bg-surface-variant hover:text-on-surface transition-colors" href="#">DES</a>
+<a class="h-full flex items-center px-4 text-on-surface-variant font-medium hover:bg-surface-variant dark:hover:bg-surface-variant hover:text-on-surface transition-colors" href="#">ECO</a>
+<a class="h-full flex items-center px-4 text-on-surface-variant font-medium hover:bg-surface-variant dark:hover:bg-surface-variant hover:text-on-surface transition-colors" href="#">PORT</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-variant dark:hover:bg-surface-variant hover:text-on-surface transition-colors p-1 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="hover:bg-surface-variant dark:hover:bg-surface-variant hover:text-on-surface transition-colors p-1 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+<button class="hover:bg-surface-variant dark:hover:bg-surface-variant hover:text-on-surface transition-colors p-1 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+</button>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden relative mt-12">
+<!-- SideNavBar Shared Component -->
+<aside class="bg-surface-container dark:bg-surface-container text-primary dark:text-primary docked full-height left-0 w-16 hover:w-48 transition-all duration-200 border-r border-outline-variant flat no shadows fixed left-0 top-12 bottom-0 flex flex-col z-40 overflow-hidden group">
+<div class="p-container-padding border-b border-outline-variant flex flex-col items-center group-hover:items-start group-hover:px-4 h-[72px] justify-center overflow-hidden whitespace-nowrap transition-all duration-200">
+<div class="text-ticker-sm font-ticker-sm text-tertiary">TRDR_01</div>
+<div class="text-label-xs font-label-xs text-on-surface-variant hidden group-hover:block mt-1">Verified Prof.</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-2 flex flex-col gap-1">
+<a class="flex items-center px-container-padding py-2 mx-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high group/item" href="#">
+<span class="material-symbols-outlined flex-shrink-0 mx-auto group-hover:mx-0 group-hover:mr-4">monitoring</span>
+<span class="text-label-xs font-label-xs hidden group-hover:block">Monitor</span>
+</a>
+<a class="flex items-center px-container-padding py-2 mx-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high group/item" href="#">
+<span class="material-symbols-outlined flex-shrink-0 mx-auto group-hover:mx-0 group-hover:mr-4">filter_alt</span>
+<span class="text-label-xs font-label-xs hidden group-hover:block">Screener</span>
+</a>
+<a class="flex items-center px-container-padding py-2 mx-1 bg-surface-variant text-tertiary border-l-2 border-tertiary hover:bg-surface-container-high dark:hover:bg-surface-container-high group/item" href="#">
+<span class="material-symbols-outlined flex-shrink-0 mx-auto group-hover:mx-0 group-hover:mr-4 -ml-[2px]">table_chart</span>
+<span class="text-label-xs font-label-xs hidden group-hover:block">Analysis</span>
+</a>
+<a class="flex items-center px-container-padding py-2 mx-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high group/item" href="#">
+<span class="material-symbols-outlined flex-shrink-0 mx-auto group-hover:mx-0 group-hover:mr-4">event_note</span>
+<span class="text-label-xs font-label-xs hidden group-hover:block">Calendar</span>
+</a>
+<a class="flex items-center px-container-padding py-2 mx-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high group/item" href="#">
+<span class="material-symbols-outlined flex-shrink-0 mx-auto group-hover:mx-0 group-hover:mr-4">pie_chart</span>
+<span class="text-label-xs font-label-xs hidden group-hover:block">Portfolio</span>
+</a>
+<a class="flex items-center px-container-padding py-2 mx-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high group/item" href="#">
+<span class="material-symbols-outlined flex-shrink-0 mx-auto group-hover:mx-0 group-hover:mr-4">payments</span>
+<span class="text-label-xs font-label-xs hidden group-hover:block">Zakat</span>
+</a>
+</nav>
+<div class="p-container-padding border-t border-outline-variant flex flex-col gap-1 overflow-hidden">
+<button class="w-full bg-on-surface text-background font-ticker-sm text-ticker-sm py-1 mb-2 hidden group-hover:block hover:bg-primary">EXECUTE ORDER</button>
+<a class="flex items-center px-container-padding py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined flex-shrink-0 mx-auto group-hover:mx-0 group-hover:mr-4">help_outline</span>
+<span class="text-label-xs font-label-xs hidden group-hover:block">Help</span>
+</a>
+<a class="flex items-center px-container-padding py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined flex-shrink-0 mx-auto group-hover:mx-0 group-hover:mr-4">logout</span>
+<span class="text-label-xs font-label-xs hidden group-hover:block">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas: FA Spreadsheet View -->
+<main class="flex-1 ml-16 flex flex-col bg-outline-variant gap-gutter h-full">
+<!-- Top Command & Info Bar -->
+<div class="bg-surface p-container-padding flex justify-between items-end border-b border-outline-variant flex-shrink-0">
+<div>
+<div class="flex items-baseline gap-4">
+<h1 class="text-display-lg font-display-lg text-on-surface m-0 leading-none">AAPL <span class="text-headline-md font-headline-md text-on-surface-variant ml-2 font-normal">US Equity</span></h1>
+<span class="text-data-tabular font-data-tabular text-tertiary bg-tertiary-container px-2 py-0.5 border border-on-tertiary-container">ACTIVE</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant mt-2">
+                        Apple Inc. • Information Technology • Technology Hardware, Storage &amp; Peripherals
+                    </div>
+</div>
+<div class="text-right">
+<div class="text-ticker-sm font-ticker-sm text-on-surface">CUR: USD</div>
+<div class="text-ticker-sm font-ticker-sm text-on-surface-variant">SCALE: Millions</div>
+</div>
+</div>
+<!-- Tab Navigation -->
+<div class="bg-surface px-container-padding pt-2 flex gap-1 border-b border-outline-variant flex-shrink-0">
+<button class="px-4 py-1.5 bg-surface-variant border-t border-l border-r border-tertiary text-tertiary font-label-xs text-label-xs tracking-wider uppercase -mb-[1px] relative z-10">Income Statement</button>
+<button class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-xs text-label-xs tracking-wider uppercase border-t border-l border-r border-transparent">Balance Sheet</button>
+<button class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-xs text-label-xs tracking-wider uppercase border-t border-l border-r border-transparent">Cash Flow</button>
+</div>
+<!-- Spreadsheet Grid Area -->
+<div class="flex-1 bg-surface overflow-auto relative">
+<table class="w-full border-collapse text-left whitespace-nowrap">
+<thead class="bg-surface-container-highest sticky top-0 sticky-top">
+<tr>
+<th class="px-4 py-2 font-label-xs text-label-xs text-on-surface-variant uppercase border-b border-r border-outline-variant sticky left-0 bg-surface-container-highest sticky-top-left w-64">In Millions of USD</th>
+<!-- Years 2014 to 2023 -->
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-on-surface text-right border-b border-outline-variant w-32">2014</th>
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-on-surface text-right border-b border-outline-variant w-32">2015</th>
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-on-surface text-right border-b border-outline-variant w-32">2016</th>
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-on-surface text-right border-b border-outline-variant w-32">2017</th>
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-on-surface text-right border-b border-outline-variant w-32">2018</th>
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-on-surface text-right border-b border-outline-variant w-32">2019</th>
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-on-surface text-right border-b border-outline-variant w-32">2020</th>
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-on-surface text-right border-b border-outline-variant w-32">2021</th>
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-on-surface text-right border-b border-outline-variant w-32">2022</th>
+<th class="px-4 py-2 font-ticker-sm text-ticker-sm text-tertiary text-right border-b border-outline-variant w-32 bg-surface-variant">2023</th>
+</tr>
+</thead>
+<tbody class="font-data-tabular text-data-tabular">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high border-b border-outline-variant even:bg-surface-container-low odd:bg-surface group">
+<td class="px-4 py-1.5 border-r border-outline-variant sticky left-0 sticky-left group-even:bg-surface-container-low group-odd:bg-surface group-hover:bg-surface-container-high text-on-surface">Total Revenue</td>
+<td class="px-4 py-1.5 text-right text-primary">182,795.0</td>
+<td class="px-4 py-1.5 text-right text-primary">233,715.0</td>
+<td class="px-4 py-1.5 text-right text-primary">215,639.0</td>
+<td class="px-4 py-1.5 text-right text-primary">229,234.0</td>
+<td class="px-4 py-1.5 text-right text-primary">265,595.0</td>
+<td class="px-4 py-1.5 text-right text-primary">260,174.0</td>
+<td class="px-4 py-1.5 text-right text-primary">274,515.0</td>
+<td class="px-4 py-1.5 text-right text-primary">365,817.0</td>
+<td class="px-4 py-1.5 text-right text-primary">394,328.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface font-semibold bg-surface-variant/30">383,285.0</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high border-b border-outline-variant even:bg-surface-container-low odd:bg-surface group">
+<td class="px-4 py-1.5 border-r border-outline-variant sticky left-0 sticky-left group-even:bg-surface-container-low group-odd:bg-surface group-hover:bg-surface-container-high text-on-surface-variant pl-8">Cost of Revenue</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">112,258.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">140,089.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">131,376.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">141,048.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">163,756.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">161,782.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">169,559.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">212,981.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">223,546.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant bg-surface-variant/30">214,137.0</td>
+</tr>
+<!-- Row 3: Subtotal -->
+<tr class="hover:bg-surface-container-high border-b border-outline-variant bg-surface-container group font-medium">
+<td class="px-4 py-1.5 border-r border-outline-variant sticky left-0 sticky-left bg-surface-container group-hover:bg-surface-container-high text-on-surface">Gross Profit</td>
+<td class="px-4 py-1.5 text-right text-on-surface">70,537.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">93,626.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">84,263.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">88,186.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">101,839.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">98,392.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">104,956.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">152,836.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">170,782.0</td>
+<td class="px-4 py-1.5 text-right text-tertiary bg-surface-variant/30">169,148.0</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high border-b border-outline-variant even:bg-surface-container-low odd:bg-surface group">
+<td class="px-4 py-1.5 border-r border-outline-variant sticky left-0 sticky-left group-even:bg-surface-container-low group-odd:bg-surface group-hover:bg-surface-container-high text-on-surface-variant pl-8">Operating Expenses</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">18,034.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">22,396.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">24,239.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">26,842.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">30,941.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">34,462.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">38,668.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">43,887.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">51,345.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant bg-surface-variant/30">54,847.0</td>
+</tr>
+<!-- Row 5: Subtotal -->
+<tr class="hover:bg-surface-container-high border-b border-outline-variant bg-surface-container group font-medium">
+<td class="px-4 py-1.5 border-r border-outline-variant sticky left-0 sticky-left bg-surface-container group-hover:bg-surface-container-high text-on-surface">Operating Income</td>
+<td class="px-4 py-1.5 text-right text-on-surface">52,503.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">71,230.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">60,024.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">61,344.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">70,898.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">63,930.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">66,288.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">108,949.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface">119,437.0</td>
+<td class="px-4 py-1.5 text-right text-tertiary bg-surface-variant/30">114,301.0</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-high border-b border-outline-variant even:bg-surface-container-low odd:bg-surface group">
+<td class="px-4 py-1.5 border-r border-outline-variant sticky left-0 sticky-left group-even:bg-surface-container-low group-odd:bg-surface group-hover:bg-surface-container-high text-on-surface-variant pl-8">Provision for Income Taxes</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">13,973.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">19,121.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">15,685.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">15,738.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">13,372.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">10,481.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">9,680.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">14,527.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant">19,300.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface-variant bg-surface-variant/30">16,741.0</td>
+</tr>
+<!-- Row 7: Grand Total -->
+<tr class="hover:bg-surface-container-high border-b-2 border-outline-variant bg-surface-container group font-bold">
+<td class="px-4 py-2 border-r border-outline-variant sticky left-0 sticky-left bg-surface-container group-hover:bg-surface-container-high text-on-surface">Net Income</td>
+<td class="px-4 py-2 text-right text-on-surface">39,510.0</td>
+<td class="px-4 py-2 text-right text-on-surface">53,394.0</td>
+<td class="px-4 py-2 text-right text-on-surface">45,687.0</td>
+<td class="px-4 py-2 text-right text-on-surface">48,351.0</td>
+<td class="px-4 py-2 text-right text-on-surface">59,531.0</td>
+<td class="px-4 py-2 text-right text-on-surface">55,256.0</td>
+<td class="px-4 py-2 text-right text-on-surface">57,411.0</td>
+<td class="px-4 py-2 text-right text-on-surface">94,680.0</td>
+<td class="px-4 py-2 text-right text-on-surface">99,803.0</td>
+<td class="px-4 py-2 text-right text-tertiary bg-surface-variant/30 border-b-2 border-tertiary">96,995.0</td>
+</tr>
+<!-- Row 8: Metrics -->
+<tr class="hover:bg-surface-container-high border-b border-outline-variant even:bg-surface-container-low odd:bg-surface group">
+<td class="px-4 py-1.5 border-r border-outline-variant sticky left-0 sticky-left group-even:bg-surface-container-low group-odd:bg-surface group-hover:bg-surface-container-high text-on-surface mt-4 block">EBITDA</td>
+<td class="px-4 py-1.5 text-right text-primary">60,449.0</td>
+<td class="px-4 py-1.5 text-right text-primary">82,487.0</td>
+<td class="px-4 py-1.5 text-right text-primary">70,529.0</td>
+<td class="px-4 py-1.5 text-right text-primary">71,501.0</td>
+<td class="px-4 py-1.5 text-right text-primary">81,801.0</td>
+<td class="px-4 py-1.5 text-right text-primary">76,466.0</td>
+<td class="px-4 py-1.5 text-right text-primary">77,344.0</td>
+<td class="px-4 py-1.5 text-right text-primary">120,233.0</td>
+<td class="px-4 py-1.5 text-right text-primary">130,541.0</td>
+<td class="px-4 py-1.5 text-right text-on-surface bg-surface-variant/30">125,820.0</td>
+</tr>
+<tr class="hover:bg-surface-container-high border-b border-outline-variant even:bg-surface-container-low odd:bg-surface group">
+<td class="px-4 py-1.5 border-r border-outline-variant sticky left-0 sticky-left group-even:bg-surface-container-low group-odd:bg-surface group-hover:bg-surface-container-high text-on-surface block">EPS (Diluted)</td>
+<td class="px-4 py-1.5 text-right text-primary font-ticker-sm">1.61</td>
+<td class="px-4 py-1.5 text-right text-primary font-ticker-sm">2.28</td>
+<td class="px-4 py-1.5 text-right text-primary font-ticker-sm">2.08</td>
+<td class="px-4 py-1.5 text-right text-primary font-ticker-sm">2.30</td>
+<td class="px-4 py-1.5 text-right text-primary font-ticker-sm">2.98</td>
+<td class="px-4 py-1.5 text-right text-primary font-ticker-sm">2.97</td>
+<td class="px-4 py-1.5 text-right text-primary font-ticker-sm">3.28</td>
+<td class="px-4 py-1.5 text-right text-primary font-ticker-sm">5.61</td>
+<td class="px-4 py-1.5 text-right text-primary font-ticker-sm">6.11</td>
+<td class="px-4 py-1.5 text-right text-on-surface font-ticker-sm bg-surface-variant/30">6.13</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Bottom Status Bar -->
+<div class="bg-surface p-1 border-t border-outline-variant flex justify-between items-center text-label-xs font-label-xs text-on-surface-variant flex-shrink-0">
+<div>Source: EDGAR / 10-K</div>
+<div class="flex gap-4">
+<span>LST_UPD: 2023-11-03 16:30 EST</span>
+<span class="text-tertiary">SYNC: OK</span>
+</div>
+</div>
+</main>
+</div>
+</body></html>

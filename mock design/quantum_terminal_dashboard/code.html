@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantum Terminal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#051424",
+                    "surface-container-high": "#1c2b3c",
+                    "secondary-container": "#464950",
+                    "on-primary-fixed": "#1a1c1f",
+                    "on-primary-fixed-variant": "#45474a",
+                    "on-tertiary": "#003915",
+                    "surface-container-highest": "#273647",
+                    "tertiary": "#4ae176",
+                    "secondary-fixed-dim": "#c4c6ce",
+                    "on-tertiary-container": "#009241",
+                    "on-background": "#d4e4fa",
+                    "primary-fixed-dim": "#c6c6ca",
+                    "background": "#051424",
+                    "on-secondary-fixed": "#191c22",
+                    "on-surface-variant": "#c6c6ca",
+                    "primary-fixed": "#e2e2e6",
+                    "secondary-fixed": "#e1e2ea",
+                    "surface-variant": "#273647",
+                    "surface-container": "#122131",
+                    "inverse-surface": "#d4e4fa",
+                    "on-error": "#690005",
+                    "tertiary-container": "#001906",
+                    "inverse-primary": "#5d5e62",
+                    "secondary": "#c4c6ce",
+                    "surface-bright": "#2c3a4c",
+                    "on-secondary": "#2d3037",
+                    "primary-container": "#121417",
+                    "outline": "#8f9094",
+                    "inverse-on-surface": "#233143",
+                    "on-secondary-container": "#b6b8c0",
+                    "tertiary-fixed": "#6bff8f",
+                    "tertiary-fixed-dim": "#4ae176",
+                    "surface-container-low": "#0d1c2d",
+                    "on-secondary-fixed-variant": "#44474d",
+                    "on-tertiary-fixed": "#002109",
+                    "outline-variant": "#45474a",
+                    "error": "#ffb4ab",
+                    "on-surface": "#d4e4fa",
+                    "on-primary-container": "#7d7e82",
+                    "surface-tint": "#c6c6ca",
+                    "surface-container-lowest": "#010f1f",
+                    "on-tertiary-fixed-variant": "#005321",
+                    "on-primary": "#2f3034",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "primary": "#c6c6ca",
+                    "surface-dim": "#051424"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "1px",
+                    "edge-margin": "0px",
+                    "stack-compact": "4px",
+                    "unit": "4px",
+                    "container-padding": "8px",
+                    "stack-default": "12px"
+            },
+            "fontFamily": {
+                    "ticker-sm": [
+                            "JetBrains Mono"
+                    ],
+                    "label-xs": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-md": [
+                            "Inter"
+                    ],
+                    "display-lg": [
+                            "Inter"
+                    ],
+                    "data-tabular": [
+                            "Inter"
+                    ],
+                    "body-sm": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "ticker-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-xs": [
+                            "11px",
+                            {
+                                    "lineHeight": "14px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-md": [
+                            "18px",
+                            {
+                                    "lineHeight": "24px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "data-tabular": [
+                            "13px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-sm": [
+                            "13px",
+                            {
+                                    "lineHeight": "18px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        /* Custom ultra-thin scrollbars for high density */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #051424;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #273647;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #45474a;
+        }
+        
+        .bento-grid {
+            display: grid;
+            gap: 1px;
+            background-color: #2D333D; /* Grid line color */
+        }
+        
+        .bento-item {
+            background-color: #051424; /* Surface color */
+            overflow: hidden;
+        }
+
+        .ticker-scroll {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Zebra striping for tables */
+        .data-table tr:nth-child(even) {
+            background-color: #121417;
+        }
+        .data-table tr:nth-child(odd) {
+            background-color: #1A1D23;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface font-headline-md text-headline-md docked full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center w-full px-container-padding h-12 shrink-0">
+<div class="font-display-lg text-display-lg font-black text-on-surface uppercase tracking-tighter">
+            QUANTUM TERMINAL
+        </div>
+<!-- Search Bar (on_left relative to trailing actions) -->
+<div class="flex-1 flex justify-center px-4">
+<div class="relative w-full max-w-xl group">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-outline-variant text-sm">search</span>
+<input autofocus="" class="w-full bg-surface-container-high border-b border-outline-variant focus:border-primary text-primary font-ticker-sm text-ticker-sm pl-8 pr-8 py-1 rounded-none outline-none focus:ring-0 placeholder:text-outline-variant" placeholder="/COMMAND or TICKER" type="text"/>
+<div class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+<kbd class="font-label-xs text-label-xs text-outline bg-surface-container px-1 border border-outline-variant">⌘</kbd>
+<kbd class="font-label-xs text-label-xs text-outline bg-surface-container px-1 border border-outline-variant">K</kbd>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-stack-compact text-on-secondary-container">
+<button class="hover:bg-surface-container-highest transition-colors p-1 rounded-none" title="terminal">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</button>
+<button class="hover:bg-surface-container-highest transition-colors p-1 rounded-none" title="keyboard_command_key">
+<span class="material-symbols-outlined text-[20px]">keyboard_command_key</span>
+</button>
+<button class="hover:bg-surface-container-highest transition-colors p-1 rounded-none" title="settings">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<button class="hover:bg-surface-container-highest transition-colors p-1 rounded-none" title="notifications">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+</div>
+</header>
+<!-- Ticker Tape -->
+<div class="h-6 border-b border-outline-variant bg-surface-container overflow-hidden flex items-center shrink-0">
+<div class="ticker-scroll font-ticker-sm text-ticker-sm text-primary flex gap-8">
+<!-- Duplicated for seamless scrolling -->
+<div class="flex gap-8">
+<span><span class="text-on-surface">SPX</span> 5,123.45 <span class="text-tertiary">+0.45%</span></span>
+<span><span class="text-on-surface">DJI</span> 38,904.04 <span class="text-error">-0.12%</span></span>
+<span><span class="text-on-surface">IXIC</span> 16,248.52 <span class="text-tertiary">+0.82%</span></span>
+<span><span class="text-on-surface">RUT</span> 2,054.32 <span class="text-tertiary">+1.15%</span></span>
+<span><span class="text-on-surface">VIX</span> 13.82 <span class="text-error">-2.40%</span></span>
+<span><span class="text-on-surface">CL=F</span> 79.97 <span class="text-tertiary">+0.88%</span></span>
+<span><span class="text-on-surface">GC=F</span> 2,095.70 <span class="text-error">-0.45%</span></span>
+</div>
+<div class="flex gap-8">
+<span><span class="text-on-surface">SPX</span> 5,123.45 <span class="text-tertiary">+0.45%</span></span>
+<span><span class="text-on-surface">DJI</span> 38,904.04 <span class="text-error">-0.12%</span></span>
+<span><span class="text-on-surface">IXIC</span> 16,248.52 <span class="text-tertiary">+0.82%</span></span>
+<span><span class="text-on-surface">RUT</span> 2,054.32 <span class="text-tertiary">+1.15%</span></span>
+<span><span class="text-on-surface">VIX</span> 13.82 <span class="text-error">-2.40%</span></span>
+<span><span class="text-on-surface">CL=F</span> 79.97 <span class="text-tertiary">+0.88%</span></span>
+<span><span class="text-on-surface">GC=F</span> 2,095.70 <span class="text-error">-0.45%</span></span>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="flex-1 flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest font-label-xs text-label-xs docked left-0 h-full w-16 border-r border-outline-variant flat no shadows flex flex-col items-center py-stack-default shrink-0">
+<div class="mb-4 text-center">
+<div class="w-8 h-8 bg-surface-container-high rounded-full mx-auto mb-1 flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">person</span>
+</div>
+<div class="font-ticker-sm text-[8px] text-primary leading-tight">TRADER_01</div>
+</div>
+<div class="flex flex-col gap-2 w-full mt-4">
+<button class="w-full py-3 flex flex-col items-center gap-1 bg-primary text-on-primary transition-all duration-75">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[9px]">Dashboard</span>
+</button>
+<button class="w-full py-3 flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-all duration-75">
+<span class="material-symbols-outlined text-[20px]">show_chart</span>
+<span class="text-[9px]">Markets</span>
+</button>
+<button class="w-full py-3 flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-all duration-75">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span class="text-[9px]">Portfolio</span>
+</button>
+<button class="w-full py-3 flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-all duration-75">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+<span class="text-[9px]">Analytics</span>
+</button>
+<button class="w-full py-3 flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-all duration-75">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="text-[9px]">History</span>
+</button>
+</div>
+</nav>
+<!-- Bento Grid Layout -->
+<main class="flex-1 bento-grid grid-cols-12 grid-rows-2 h-full overflow-hidden p-[1px]">
+<!-- Top Center: Chart (Col Span 8, Row Span 1) -->
+<section class="bento-item col-span-8 row-span-1 flex flex-col">
+<div class="h-8 border-b border-outline-variant flex items-center px-container-padding justify-between bg-surface-container-low shrink-0">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md text-on-surface">AAPL <span class="text-tertiary ml-2">175.43</span></h2>
+<div class="flex gap-1 font-ticker-sm text-label-xs">
+<span class="text-tertiary">+1.24 (0.71%)</span>
+</div>
+</div>
+<div class="flex font-label-xs text-label-xs">
+<button class="px-2 py-1 text-on-surface-variant hover:text-primary border-b-2 border-transparent">1D</button>
+<button class="px-2 py-1 text-on-surface-variant hover:text-primary border-b-2 border-transparent">1W</button>
+<button class="px-2 py-1 text-primary border-b-2 border-primary">1M</button>
+<button class="px-2 py-1 text-on-surface-variant hover:text-primary border-b-2 border-transparent">3M</button>
+<button class="px-2 py-1 text-on-surface-variant hover:text-primary border-b-2 border-transparent">1Y</button>
+</div>
+</div>
+<div class="flex-1 relative bg-surface-container-lowest flex items-center justify-center overflow-hidden">
+<!-- Placeholder for Chart -->
+<div class="absolute inset-0 flex items-center justify-center text-outline-variant font-ticker-sm">
+                        [CHART RENDERER ACTIVE]
+                        <!-- Fake Candlesticks for visual filler -->
+<div class="absolute bottom-4 left-4 right-4 h-32 flex items-end justify-between px-4 opacity-50">
+<div class="w-1 h-16 bg-[#EF4444] relative"><div class="absolute top-[-10px] w-[1px] h-24 bg-[#EF4444] left-1/2 -translate-x-1/2"></div></div>
+<div class="w-1 h-20 bg-[#22C55E] relative"><div class="absolute top-[-5px] w-[1px] h-30 bg-[#22C55E] left-1/2 -translate-x-1/2"></div></div>
+<div class="w-1 h-12 bg-[#EF4444] relative"><div class="absolute top-[-8px] w-[1px] h-20 bg-[#EF4444] left-1/2 -translate-x-1/2"></div></div>
+<div class="w-1 h-24 bg-[#22C55E] relative"><div class="absolute top-[-15px] w-[1px] h-32 bg-[#22C55E] left-1/2 -translate-x-1/2"></div></div>
+<div class="w-1 h-18 bg-[#22C55E] relative"><div class="absolute top-[-5px] w-[1px] h-28 bg-[#22C55E] left-1/2 -translate-x-1/2"></div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Top Right: Fundamentals Grid (Col Span 4, Row Span 1) -->
+<section class="bento-item col-span-4 row-span-1 flex flex-col">
+<div class="h-8 border-b border-outline-variant flex items-center px-container-padding bg-surface-container-low shrink-0">
+<h3 class="font-label-xs text-label-xs text-outline tracking-widest uppercase">Fundamentals</h3>
+</div>
+<div class="flex-1 overflow-auto p-container-padding">
+<table class="w-full font-data-tabular text-data-tabular data-table">
+<tbody>
+<tr class="border-b border-outline-variant h-6">
+<td class="text-on-surface-variant px-1">Market Cap</td>
+<td class="text-right text-on-surface font-ticker-sm px-1">2.84T</td>
+</tr>
+<tr class="border-b border-outline-variant h-6">
+<td class="text-on-surface-variant px-1">P/E Ratio (TTM)</td>
+<td class="text-right text-on-surface font-ticker-sm px-1">28.45</td>
+</tr>
+<tr class="border-b border-outline-variant h-6">
+<td class="text-on-surface-variant px-1">EPS (TTM)</td>
+<td class="text-right text-on-surface font-ticker-sm px-1">6.42</td>
+</tr>
+<tr class="border-b border-outline-variant h-6">
+<td class="text-on-surface-variant px-1">Dividend Yield</td>
+<td class="text-right text-on-surface font-ticker-sm px-1">0.53%</td>
+</tr>
+<tr class="border-b border-outline-variant h-6">
+<td class="text-on-surface-variant px-1">Beta (5Y Monthly)</td>
+<td class="text-right text-on-surface font-ticker-sm px-1">1.28</td>
+</tr>
+<tr class="border-b border-outline-variant h-6">
+<td class="text-on-surface-variant px-1">Debt/Eq</td>
+<td class="text-right text-on-surface font-ticker-sm px-1">1.45</td>
+</tr>
+<tr class="border-b border-outline-variant h-6">
+<td class="text-on-surface-variant px-1">ROE</td>
+<td class="text-right text-on-surface font-ticker-sm px-1">156.4%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Bottom Left: News Feed (Col Span 6, Row Span 1) -->
+<section class="bento-item col-span-6 row-span-1 flex flex-col">
+<div class="h-8 border-b border-outline-variant flex items-center px-container-padding bg-surface-container-low shrink-0">
+<h3 class="font-label-xs text-label-xs text-outline tracking-widest uppercase">Live Feed</h3>
+</div>
+<div class="flex-1 overflow-auto p-container-padding flex flex-col gap-0">
+<!-- News Item -->
+<div class="py-2 border-b border-outline-variant flex gap-4 hover:bg-surface-container-highest cursor-pointer">
+<div class="font-ticker-sm text-[10px] text-outline-variant whitespace-nowrap pt-0.5">14:02:15</div>
+<div>
+<div class="font-body-sm text-body-sm text-on-surface leading-snug">Fed signals potential rate cuts by Q3, markets rally</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-surface-container px-1 font-label-xs text-[9px] text-primary border border-outline-variant">MACRO</span>
+<span class="text-[10px] text-on-surface-variant">Reuters</span>
+</div>
+</div>
+</div>
+<!-- News Item -->
+<div class="py-2 border-b border-outline-variant flex gap-4 hover:bg-surface-container-highest cursor-pointer">
+<div class="font-ticker-sm text-[10px] text-outline-variant whitespace-nowrap pt-0.5">13:45:00</div>
+<div>
+<div class="font-body-sm text-body-sm text-on-surface leading-snug">Apple unveils new silicon architecture in surprise keynote</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-surface-container px-1 font-label-xs text-[9px] text-tertiary border border-outline-variant">AAPL</span>
+<span class="text-[10px] text-on-surface-variant">Bloomberg</span>
+</div>
+</div>
+</div>
+<!-- News Item -->
+<div class="py-2 border-b border-outline-variant flex gap-4 hover:bg-surface-container-highest cursor-pointer">
+<div class="font-ticker-sm text-[10px] text-outline-variant whitespace-nowrap pt-0.5">13:12:44</div>
+<div>
+<div class="font-body-sm text-body-sm text-on-surface leading-snug">Oil prices slide as inventories show unexpected build</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-surface-container px-1 font-label-xs text-[9px] text-error border border-outline-variant">CL=F</span>
+<span class="text-[10px] text-on-surface-variant">WSJ</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Right: Watchlist (Col Span 6, Row Span 1) -->
+<section class="bento-item col-span-6 row-span-1 flex flex-col">
+<div class="h-8 border-b border-outline-variant flex items-center px-container-padding bg-surface-container-low shrink-0 justify-between">
+<h3 class="font-label-xs text-label-xs text-outline tracking-widest uppercase">Watchlist: Tech Mega</h3>
+<button class="text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+<div class="flex-1 overflow-auto">
+<table class="w-full font-data-tabular text-data-tabular data-table">
+<thead class="sticky top-0 bg-surface border-b border-outline-variant z-10 font-label-xs text-[10px] text-outline-variant text-left">
+<tr>
+<th class="px-2 py-1 font-normal">SYM</th>
+<th class="px-2 py-1 font-normal text-right">LAST</th>
+<th class="px-2 py-1 font-normal text-right">CHG</th>
+<th class="px-2 py-1 font-normal text-right">%CHG</th>
+<th class="px-2 py-1 font-normal text-right">VOL</th>
+</tr>
+</thead>
+<tbody class="font-ticker-sm">
+<tr class="h-6 hover:bg-surface-container-highest cursor-pointer border-b border-outline-variant border-opacity-30">
+<td class="px-2 text-primary">MSFT</td>
+<td class="px-2 text-right text-on-surface">415.22</td>
+<td class="px-2 text-right text-tertiary">+2.10</td>
+<td class="px-2 text-right text-tertiary">+0.51%</td>
+<td class="px-2 text-right text-on-surface-variant">12.4M</td>
+</tr>
+<tr class="h-6 hover:bg-surface-container-highest cursor-pointer border-b border-outline-variant border-opacity-30">
+<td class="px-2 text-primary">NVDA</td>
+<td class="px-2 text-right text-on-surface">885.14</td>
+<td class="px-2 text-right text-tertiary">+12.45</td>
+<td class="px-2 text-right text-tertiary">+1.42%</td>
+<td class="px-2 text-right text-on-surface-variant">45.2M</td>
+</tr>
+<tr class="h-6 hover:bg-surface-container-highest cursor-pointer border-b border-outline-variant border-opacity-30">
+<td class="px-2 text-primary">GOOGL</td>
+<td class="px-2 text-right text-on-surface">144.34</td>
+<td class="px-2 text-right text-error">-0.85</td>
+<td class="px-2 text-right text-error">-0.58%</td>
+<td class="px-2 text-right text-on-surface-variant">18.1M</td>
+</tr>
+<tr class="h-6 hover:bg-surface-container-highest cursor-pointer border-b border-outline-variant border-opacity-30">
+<td class="px-2 text-primary">AMZN</td>
+<td class="px-2 text-right text-on-surface">178.15</td>
+<td class="px-2 text-right text-tertiary">+1.05</td>
+<td class="px-2 text-right text-tertiary">+0.59%</td>
+<td class="px-2 text-right text-on-surface-variant">22.8M</td>
+</tr>
+<tr class="h-6 hover:bg-surface-container-highest cursor-pointer border-b border-outline-variant border-opacity-30">
+<td class="px-2 text-primary">META</td>
+<td class="px-2 text-right text-on-surface">495.20</td>
+<td class="px-2 text-right text-error">-4.10</td>
+<td class="px-2 text-right text-error">-0.82%</td>
+<td class="px-2 text-right text-on-surface-variant">9.3M</td>
+</tr>
+<tr class="h-6 hover:bg-surface-container-highest cursor-pointer border-b border-outline-variant border-opacity-30">
+<td class="px-2 text-primary">TSLA</td>
+<td class="px-2 text-right text-on-surface">175.34</td>
+<td class="px-2 text-right text-error">-2.15</td>
+<td class="px-2 text-right text-error">-1.21%</td>
+<td class="px-2 text-right text-on-surface-variant">65.4M</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container font-ticker-sm text-ticker-sm docked full-width bottom-0 border-t border-outline-variant flat no shadows cursor-default fixed bottom-0 w-full flex justify-between items-center px-container-padding h-6 z-50 shrink-0">
+<div class="text-on-surface">
+            SYSTEM STATUS: NOMINAL | LATENCY: 14MS
+        </div>
+<div class="flex gap-4">
+<a class="text-outline hover:text-on-surface" href="#">API</a>
+<a class="text-outline hover:text-on-surface" href="#">DOCS</a>
+<a class="text-outline hover:text-on-surface" href="#">SUPPORT</a>
+</div>
+</footer>
+</body></html>

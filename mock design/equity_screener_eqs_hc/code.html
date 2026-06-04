@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantum Terminal - Equity Screener (EQS)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#000000",
+                    "primary-container": "#000000",
+                    "tertiary-container": "#000000",
+                    "on-primary-fixed": "#000000",
+                    "tertiary": "#00FFFF",
+                    "on-error-container": "#FFFFFF",
+                    "surface-variant": "#000000",
+                    "outline": "#00FFFF",
+                    "on-tertiary-container": "#00FFFF",
+                    "primary-fixed-dim": "#FFFFFF",
+                    "primary-fixed": "#FFFFFF",
+                    "inverse-on-surface": "#000000",
+                    "on-secondary": "#000000",
+                    "surface-container-lowest": "#000000",
+                    "secondary-fixed-dim": "#FFFFFF",
+                    "inverse-surface": "#FFFFFF",
+                    "secondary": "#FFFFFF",
+                    "on-surface": "#FFFFFF",
+                    "on-primary": "#000000",
+                    "surface-container-low": "#000000",
+                    "background": "#000000",
+                    "error-container": "#FF0000",
+                    "tertiary-fixed": "#00FFFF",
+                    "surface-container": "#000000",
+                    "on-secondary-fixed-variant": "#000000",
+                    "error": "#FF0000",
+                    "secondary-fixed": "#FFFFFF",
+                    "surface-tint": "#FFFFFF",
+                    "outline-variant": "#00FFFF",
+                    "on-secondary-fixed": "#000000",
+                    "on-error": "#FFFFFF",
+                    "secondary-container": "#000000",
+                    "on-primary-container": "#FFFFFF",
+                    "on-tertiary": "#000000",
+                    "on-surface-variant": "#FFFFFF",
+                    "surface-container-high": "#000000",
+                    "on-tertiary-fixed-variant": "#000000",
+                    "surface": "#000000",
+                    "on-background": "#FFFFFF",
+                    "inverse-primary": "#000000",
+                    "tertiary-fixed-dim": "#00FFFF",
+                    "primary": "#FFFFFF",
+                    "on-secondary-container": "#FFFFFF",
+                    "on-primary-fixed-variant": "#000000",
+                    "surface-bright": "#000000",
+                    "surface-dim": "#000000",
+                    "surface-container-highest": "#000000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "0px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-compact": "4px",
+                    "gutter": "1px",
+                    "edge-margin": "0px",
+                    "stack-default": "12px",
+                    "container-padding": "8px"
+            },
+            "fontFamily": {
+                    "label-xs": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-md": [
+                            "JetBrains Mono"
+                    ],
+                    "display-lg": [
+                            "JetBrains Mono"
+                    ],
+                    "body-sm": [
+                            "JetBrains Mono"
+                    ],
+                    "data-tabular": [
+                            "JetBrains Mono"
+                    ],
+                    "ticker-sm": [
+                            "JetBrains Mono"
+                    ]
+            },
+            "fontSize": {
+                    "label-xs": [
+                            "11px",
+                            {
+                                    "lineHeight": "14px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-md": [
+                            "18px",
+                            {
+                                    "lineHeight": "24px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-sm": [
+                            "13px",
+                            {
+                                    "lineHeight": "18px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "data-tabular": [
+                            "13px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "ticker-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+            border-left: 1px solid #00FFFF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00FFFF;
+            border-radius: 0;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFFFFF;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 2px;
+            background: #00FFFF;
+            outline: none;
+            border-radius: 0;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 8px;
+            height: 16px;
+            background: #FFFFFF;
+            cursor: pointer;
+            border-radius: 0;
+            border: 1px solid #00FFFF;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background h-screen flex flex-col font-body-sm text-body-sm">
+<!-- TopAppBar from JSON -->
+<header class="flex justify-between items-center w-full px-stack-default h-12 z-50 bg-background border-b border-outline-variant flex-shrink-0">
+<div class="flex items-center gap-6 h-full">
+<div class="text-headline-md font-headline-md font-bold tracking-tight text-on-surface">
+                FIN-TERMINAL v2.4
+            </div>
+<!-- Navigation Links - EQS Active -->
+<nav class="hidden md:flex h-full">
+<a class="h-full px-4 flex items-center text-on-surface border-b-2 border-tertiary font-bold hover:bg-surface-variant hover:text-on-surface transition-colors opacity-80 duration-75" href="#">
+<span class="text-label-xs font-label-xs">EQS</span>
+</a>
+<a class="h-full px-4 flex items-center text-on-surface-variant font-medium hover:bg-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="text-label-xs font-label-xs">FA</span>
+</a>
+<a class="h-full px-4 flex items-center text-on-surface-variant font-medium hover:bg-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="text-label-xs font-label-xs">DES</span>
+</a>
+<a class="h-full px-4 flex items-center text-on-surface-variant font-medium hover:bg-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="text-label-xs font-label-xs">ECO</span>
+</a>
+<a class="h-full px-4 flex items-center text-on-surface-variant font-medium hover:bg-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="text-label-xs font-label-xs">PORT</span>
+</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search Bar: on_left conceptually placed near actions in top bar context -->
+<div class="hidden lg:flex items-center border-b border-outline-variant pb-1 w-48 focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none outline-none text-ticker-sm font-ticker-sm text-primary w-full p-0 h-4 placeholder-on-surface-variant focus:ring-0" placeholder="/CMD" type="text"/>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<button aria-label="notifications" class="p-1 hover:bg-surface-variant transition-colors border border-transparent hover:border-outline-variant">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button aria-label="settings" class="p-1 hover:bg-surface-variant transition-colors border border-transparent hover:border-outline-variant">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<button aria-label="account_circle" class="p-1 hover:bg-surface-variant transition-colors border border-transparent hover:border-outline-variant">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Layout Container -->
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar from JSON (hidden on md down for split layout space, but included structurally) -->
+<aside class="hidden md:flex fixed left-0 top-12 bottom-0 flex-col z-40 bg-surface-container w-16 hover:w-48 transition-all duration-200 border-r border-outline-variant group overflow-hidden flex-shrink-0" style="transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);">
+<div class="p-stack-default border-b border-outline-variant flex items-center min-w-max">
+<div class="w-8 h-8 bg-surface-variant border border-outline-variant rounded-none flex items-center justify-center text-tertiary mr-3 shrink-0">
+<span class="material-symbols-outlined text-[18px]">account_circle</span>
+</div>
+<div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+<div class="text-ticker-sm font-ticker-sm text-tertiary">TRDR_01</div>
+<div class="text-label-xs font-label-xs text-on-surface-variant">Verified Prof.</div>
+</div>
+</div>
+<nav class="flex-1 py-2 flex flex-col min-w-max">
+<a class="flex items-center h-10 px-4 hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined text-[20px] mr-4 shrink-0">monitoring</span>
+<span class="text-label-xs font-label-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">Monitor</span>
+</a>
+<a class="flex items-center h-10 px-4 bg-surface-variant text-tertiary border border-outline-variant border-l-2 border-l-tertiary" href="#">
+<span class="material-symbols-outlined text-[20px] mr-4 shrink-0 -ml-[2px]">filter_alt</span>
+<span class="text-label-xs font-label-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">Screener</span>
+</a>
+<a class="flex items-center h-10 px-4 hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined text-[20px] mr-4 shrink-0">table_chart</span>
+<span class="text-label-xs font-label-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">Analysis</span>
+</a>
+<a class="flex items-center h-10 px-4 hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined text-[20px] mr-4 shrink-0">event_note</span>
+<span class="text-label-xs font-label-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">Calendar</span>
+</a>
+<a class="flex items-center h-10 px-4 hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined text-[20px] mr-4 shrink-0">pie_chart</span>
+<span class="text-label-xs font-label-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">Portfolio</span>
+</a>
+<a class="flex items-center h-10 px-4 hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined text-[20px] mr-4 shrink-0">payments</span>
+<span class="text-label-xs font-label-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">Zakat</span>
+</a>
+</nav>
+<div class="p-4 min-w-max border-t border-outline-variant opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+<button class="w-full bg-primary text-on-primary text-ticker-sm font-ticker-sm py-1 hover:bg-primary-fixed border border-outline-variant transition-colors">
+                    EXECUTE ORDER
+                 </button>
+</div>
+<div class="py-2 flex flex-col min-w-max border-t border-outline-variant">
+<a class="flex items-center h-10 px-4 hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined text-[20px] mr-4 shrink-0">help_outline</span>
+<span class="text-label-xs font-label-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">Help</span>
+</a>
+<a class="flex items-center h-10 px-4 hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface border border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined text-[20px] mr-4 shrink-0">logout</span>
+<span class="text-label-xs font-label-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-16 w-full overflow-hidden bg-surface-container-lowest">
+<!-- Context Header -->
+<div class="h-8 border-b border-outline-variant bg-surface-container flex items-center px-container-padding flex-shrink-0">
+<span class="text-label-xs font-label-xs text-on-surface-variant mr-2">SYS&gt;</span>
+<span class="text-ticker-sm font-ticker-sm text-primary">EQUITY_SCREENER_INIT</span>
+</div>
+<!-- Top Panel: Filters (Bento-style tight grid) -->
+<section class="flex-none p-gutter bg-outline-variant gap-gutter flex flex-col" style="height: 35%;">
+<!-- Filter Row 1 -->
+<div class="flex flex-1 gap-gutter">
+<!-- Universe / Region -->
+<div class="flex-1 bg-surface border border-outline-variant flex flex-col p-container-padding">
+<div class="text-label-xs font-label-xs text-on-surface-variant mb-2 uppercase border-b border-outline-variant pb-1">Universe Settings</div>
+<div class="flex flex-wrap gap-2 mt-2">
+<label class="flex items-center text-data-tabular font-data-tabular text-primary">
+<input checked="" class="form-checkbox h-3 w-3 text-tertiary bg-surface-variant border-outline-variant rounded-none focus:ring-0 mr-2" type="checkbox"/>
+                                US (NYSE/NASDAQ)
+                            </label>
+<label class="flex items-center text-data-tabular font-data-tabular text-on-surface-variant">
+<input class="form-checkbox h-3 w-3 text-tertiary bg-surface-variant border-outline-variant rounded-none focus:ring-0 mr-2" type="checkbox"/>
+                                EU (LSE/XETRA)
+                            </label>
+<label class="flex items-center text-data-tabular font-data-tabular text-on-surface-variant">
+<input class="form-checkbox h-3 w-3 text-tertiary bg-surface-variant border-outline-variant rounded-none focus:ring-0 mr-2" type="checkbox"/>
+                                MENA
+                            </label>
+</div>
+</div>
+<!-- Sector -->
+<div class="flex-1 bg-surface border border-outline-variant flex flex-col p-container-padding">
+<div class="text-label-xs font-label-xs text-on-surface-variant mb-2 uppercase border-b border-outline-variant pb-1">Sector Focus</div>
+<select class="mt-2 bg-surface-variant text-primary border border-outline-variant text-data-tabular font-data-tabular w-full h-6 focus:ring-1 focus:ring-tertiary rounded-none p-0 px-2">
+<option>Technology</option>
+<option>Healthcare</option>
+<option>Energy</option>
+<option>Financials (Exclude)</option>
+<option selected="">All Permissible</option>
+</select>
+</div>
+<!-- Halal Status -->
+<div class="flex-1 bg-surface border border-outline-variant flex flex-col p-container-padding">
+<div class="text-label-xs font-label-xs text-on-surface-variant mb-2 uppercase border-b border-outline-variant pb-1">Shariah Compliance</div>
+<div class="flex gap-2 mt-2">
+<button class="flex-1 border border-outline-variant bg-tertiary-container text-tertiary text-label-xs font-label-xs py-1 text-center">PASS</button>
+<button class="flex-1 border border-outline-variant text-on-surface-variant text-label-xs font-label-xs py-1 text-center hover:bg-surface-variant transition-colors">FAIL</button>
+<button class="flex-1 border border-outline-variant text-on-surface-variant text-label-xs font-label-xs py-1 text-center hover:bg-surface-variant transition-colors">DOUBT</button>
+</div>
+</div>
+</div>
+<!-- Filter Row 2 -->
+<div class="flex flex-1 gap-gutter">
+<!-- Debt/Assets Slider -->
+<div class="flex-[2] bg-surface border border-outline-variant flex flex-col p-container-padding justify-center">
+<div class="flex justify-between items-end mb-2 border-b border-outline-variant pb-1">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase">Max Debt-to-Assets</span>
+<span class="text-ticker-sm font-ticker-sm text-primary">33.00%</span>
+</div>
+<div class="flex items-center gap-4 mt-2">
+<span class="text-label-xs font-label-xs text-on-surface-variant">0%</span>
+<input class="flex-1" max="100" min="0" type="range" value="33"/>
+<span class="text-label-xs font-label-xs text-error">100%</span>
+</div>
+</div>
+<!-- NPR Slider -->
+<div class="flex-[2] bg-surface border border-outline-variant flex flex-col p-container-padding justify-center">
+<div class="flex justify-between items-end mb-2 border-b border-outline-variant pb-1">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase">Max Non-Permissible Rev</span>
+<span class="text-ticker-sm font-ticker-sm text-primary">5.00%</span>
+</div>
+<div class="flex items-center gap-4 mt-2">
+<span class="text-label-xs font-label-xs text-on-surface-variant">0%</span>
+<input class="flex-1" max="100" min="0" type="range" value="5"/>
+<span class="text-label-xs font-label-xs text-error">100%</span>
+</div>
+</div>
+<!-- Action -->
+<div class="flex-1 bg-surface border border-outline-variant flex flex-col p-container-padding justify-center items-center">
+<div class="text-ticker-sm font-ticker-sm text-tertiary mb-2">4,204 MATCHES</div>
+<button class="w-full bg-primary text-on-primary border border-outline-variant text-ticker-sm font-ticker-sm py-2 hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span> RUN SCREEN
+                        </button>
+</div>
+</div>
+</section>
+<!-- Bottom Panel: Data Grid -->
+<section class="flex-1 flex flex-col overflow-hidden border-t border-outline-variant">
+<!-- Table Header -->
+<div class="flex-none bg-surface-container-low border-b border-outline-variant flex items-center h-8 px-container-padding text-label-xs font-label-xs text-on-surface-variant select-none">
+<div class="w-24 shrink-0 pl-2 border-r border-outline-variant h-full flex items-center">TICKER</div>
+<div class="w-48 shrink-0 pl-2 border-r border-outline-variant h-full flex items-center">COMPANY NAME</div>
+<div class="w-24 shrink-0 text-right pr-2 border-r border-outline-variant h-full flex items-center justify-end">PRICE</div>
+<div class="w-32 shrink-0 text-center border-r border-outline-variant h-full flex items-center justify-center">HALAL SCORE</div>
+<div class="w-32 shrink-0 text-right pr-2 border-r border-outline-variant h-full flex items-center justify-end">DEBT/ASSETS</div>
+<div class="w-40 shrink-0 text-center border-r border-outline-variant h-full flex items-center justify-center">REV PASS/FAIL</div>
+<div class="w-32 shrink-0 text-right pr-2 h-full flex items-center justify-end">MARKET CAP</div>
+</div>
+<!-- Table Body (Scrollable) -->
+<div class="flex-1 overflow-auto bg-surface">
+<!-- Row 1 -->
+<div class="flex items-center h-8 border-b border-outline-variant hover:bg-surface-variant transition-colors cursor-pointer group">
+<div class="w-24 shrink-0 pl-2 text-ticker-sm font-ticker-sm text-primary group-hover:text-tertiary border-r border-outline-variant h-full flex items-center">AAPL</div>
+<div class="w-48 shrink-0 text-data-tabular font-data-tabular text-on-surface-variant truncate pl-2 pr-4 border-r border-outline-variant h-full flex items-center">Apple Inc.</div>
+<div class="w-24 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-primary border-r border-outline-variant h-full flex items-center justify-end">184.32</div>
+<div class="w-32 shrink-0 flex justify-center items-center border-r border-outline-variant h-full">
+<div class="px-2 py-0.5 bg-tertiary-container text-tertiary text-label-xs font-label-xs border border-outline-variant">98/100</div>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-tertiary border-r border-outline-variant h-full flex items-center justify-end">14.2%</div>
+<div class="w-40 shrink-0 flex justify-center border-r border-outline-variant h-full items-center">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-on-surface-variant h-full flex items-center justify-end">2.8T</div>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center h-8 border-b border-outline-variant hover:bg-surface-variant transition-colors cursor-pointer bg-surface group">
+<div class="w-24 shrink-0 pl-2 text-ticker-sm font-ticker-sm text-primary group-hover:text-tertiary border-r border-outline-variant h-full flex items-center">MSFT</div>
+<div class="w-48 shrink-0 text-data-tabular font-data-tabular text-on-surface-variant truncate pl-2 pr-4 border-r border-outline-variant h-full flex items-center">Microsoft Corp.</div>
+<div class="w-24 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-primary border-r border-outline-variant h-full flex items-center justify-end">402.11</div>
+<div class="w-32 shrink-0 flex justify-center items-center border-r border-outline-variant h-full">
+<div class="px-2 py-0.5 bg-tertiary-container text-tertiary text-label-xs font-label-xs border border-outline-variant">95/100</div>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-tertiary border-r border-outline-variant h-full flex items-center justify-end">11.8%</div>
+<div class="w-40 shrink-0 flex justify-center border-r border-outline-variant h-full items-center">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-on-surface-variant h-full flex items-center justify-end">3.0T</div>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center h-8 border-b border-outline-variant hover:bg-surface-variant transition-colors cursor-pointer group">
+<div class="w-24 shrink-0 pl-2 text-ticker-sm font-ticker-sm text-primary group-hover:text-tertiary border-r border-outline-variant h-full flex items-center">NVDA</div>
+<div class="w-48 shrink-0 text-data-tabular font-data-tabular text-on-surface-variant truncate pl-2 pr-4 border-r border-outline-variant h-full flex items-center">NVIDIA Corp.</div>
+<div class="w-24 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-primary border-r border-outline-variant h-full flex items-center justify-end">788.17</div>
+<div class="w-32 shrink-0 flex justify-center items-center border-r border-outline-variant h-full">
+<div class="px-2 py-0.5 bg-tertiary-container text-tertiary text-label-xs font-label-xs border border-outline-variant">99/100</div>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-tertiary border-r border-outline-variant h-full flex items-center justify-end">8.4%</div>
+<div class="w-40 shrink-0 flex justify-center border-r border-outline-variant h-full items-center">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-on-surface-variant h-full flex items-center justify-end">1.9T</div>
+</div>
+<!-- Row 4 (Warning state) -->
+<div class="flex items-center h-8 border-b border-outline-variant hover:bg-surface-variant transition-colors cursor-pointer bg-surface group">
+<div class="w-24 shrink-0 pl-2 text-ticker-sm font-ticker-sm text-primary group-hover:text-tertiary border-r border-outline-variant h-full flex items-center">TSLA</div>
+<div class="w-48 shrink-0 text-data-tabular font-data-tabular text-on-surface-variant truncate pl-2 pr-4 border-r border-outline-variant h-full flex items-center">Tesla Inc.</div>
+<div class="w-24 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-primary border-r border-outline-variant h-full flex items-center justify-end">199.40</div>
+<div class="w-32 shrink-0 flex justify-center items-center border-r border-outline-variant h-full">
+<div class="px-2 py-0.5 bg-surface-variant text-on-surface-variant text-label-xs font-label-xs border border-outline-variant">72/100</div>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-error border-r border-outline-variant h-full flex items-center justify-end">31.2%</div>
+<div class="w-40 shrink-0 flex justify-center border-r border-outline-variant h-full items-center">
+<span class="material-symbols-outlined text-[16px] text-outline">help</span>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-on-surface-variant h-full flex items-center justify-end">630B</div>
+</div>
+<!-- Row 5 -->
+<div class="flex items-center h-8 border-b border-outline-variant hover:bg-surface-variant transition-colors cursor-pointer group">
+<div class="w-24 shrink-0 pl-2 text-ticker-sm font-ticker-sm text-primary group-hover:text-tertiary border-r border-outline-variant h-full flex items-center">AMZN</div>
+<div class="w-48 shrink-0 text-data-tabular font-data-tabular text-on-surface-variant truncate pl-2 pr-4 border-r border-outline-variant h-full flex items-center">Amazon.com Inc.</div>
+<div class="w-24 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-primary border-r border-outline-variant h-full flex items-center justify-end">174.99</div>
+<div class="w-32 shrink-0 flex justify-center items-center border-r border-outline-variant h-full">
+<div class="px-2 py-0.5 bg-tertiary-container text-tertiary text-label-xs font-label-xs border border-outline-variant">88/100</div>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-tertiary border-r border-outline-variant h-full flex items-center justify-end">22.1%</div>
+<div class="w-40 shrink-0 flex justify-center border-r border-outline-variant h-full items-center">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+</div>
+<div class="w-32 shrink-0 text-right pr-2 text-data-tabular font-data-tabular text-on-surface-variant h-full flex items-center justify-end">1.8T</div>
+</div>
+</div>
+</section>
+<!-- Command Input / CLI Footer -->
+<footer class="h-8 bg-surface-container-highest border-t border-outline-variant flex items-center px-2 flex-shrink-0">
+<span class="text-tertiary font-ticker-sm text-ticker-sm mr-2">&gt;</span>
+<input class="bg-transparent border-none outline-none text-ticker-sm font-ticker-sm text-on-surface-variant w-full focus:ring-0 p-0" readonly="" type="text" value="SELECT * FROM UNIVERSE WHERE (DEBT/ASSETS &lt; 0.33) AND (NPR &lt; 0.05)"/>
+</footer>
+</main>
+</div>
+</body></html>

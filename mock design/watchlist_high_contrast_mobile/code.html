@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantum Terminal Watchlist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#002200",
+                      "on-secondary": "#013a00",
+                      "surface-container-low": "#1b1b1b",
+                      "surface-variant": "#353535",
+                      "inverse-surface": "#e2e2e2",
+                      "surface-dim": "#131313",
+                      "surface-bright": "#393939",
+                      "surface-container-high": "#2a2a2a",
+                      "secondary-fixed-dim": "#02e600",
+                      "primary-fixed": "#00fbfb",
+                      "on-error-container": "#ffdad6",
+                      "secondary-container": "#28ff1d",
+                      "on-tertiary-fixed-variant": "#930100",
+                      "surface-container": "#1f1f1f",
+                      "tertiary": "#ffffff",
+                      "outline": "#839493",
+                      "tertiary-container": "#ffdad4",
+                      "inverse-primary": "#006a6a",
+                      "surface-container-lowest": "#0e0e0e",
+                      "secondary": "#edffe1",
+                      "tertiary-fixed": "#ffdad4",
+                      "primary-container": "#00fbfb",
+                      "on-secondary-container": "#027100",
+                      "on-background": "#e2e2e2",
+                      "primary": "#ffffff",
+                      "on-tertiary": "#690100",
+                      "tertiary-fixed-dim": "#ffb4a8",
+                      "error": "#ffb4ab",
+                      "surface": "#131313",
+                      "surface-container-highest": "#353535",
+                      "on-primary-fixed-variant": "#004f4f",
+                      "on-primary-fixed": "#002020",
+                      "background": "#131313",
+                      "on-primary": "#003737",
+                      "on-surface-variant": "#b9cac9",
+                      "on-tertiary-container": "#cc0100",
+                      "error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#015300",
+                      "on-tertiary-fixed": "#410000",
+                      "primary-fixed-dim": "#00dddd",
+                      "secondary-fixed": "#77ff61",
+                      "surface-tint": "#00dddd",
+                      "outline-variant": "#3a4a49",
+                      "inverse-on-surface": "#303030",
+                      "on-error": "#690005",
+                      "on-primary-container": "#007070",
+                      "on-surface": "#e2e2e2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "1px",
+                      "panel-padding": "12px",
+                      "margin-lg": "24px",
+                      "margin-md": "16px",
+                      "unit": "4px",
+                      "margin-sm": "8px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "JetBrains Mono"
+                      ],
+                      "code-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "JetBrains Mono"
+                      ],
+                      "body-lg": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "code-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* CSS Reset for arbitrary styling, enforce system limits */
+        * { border-radius: 0px !important; }
+        body { background-color: #000000; } /* True Black background constraint */
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-tertiary font-body-md h-screen flex flex-col overflow-hidden selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar JSON Blueprint Execution -->
+<header class="w-full h-12 bg-background dark:bg-background border-b border-primary-fixed flex justify-between items-center px-gutter shrink-0">
+<div class="font-headline-md text-headline-md text-primary-fixed uppercase tracking-tighter px-margin-sm">
+            FIN_TERM_v1.0
+        </div>
+<div class="flex items-center gap-margin-md px-margin-sm text-primary-fixed dark:text-primary-fixed">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</div>
+</header>
+<!-- Main Workspace Canvas -->
+<main class="flex-1 overflow-y-auto flex flex-col p-unit gap-unit bg-[#000000]">
+<!-- Search Input -->
+<div class="p-unit shrink-0">
+<div class="relative flex items-center w-full h-12 border border-primary-fixed bg-surface-container-lowest focus-within:ring-1 focus-within:ring-primary-fixed">
+<span class="material-symbols-outlined absolute left-margin-sm text-primary-fixed">search</span>
+<input class="w-full h-full bg-transparent border-none text-tertiary font-code-sm text-code-sm pl-10 pr-margin-sm focus:ring-0 focus:outline-none placeholder:text-outline-variant" placeholder="TICKER / ISIN" type="text"/>
+</div>
+</div>
+<!-- Density Watchlist Table -->
+<div class="flex-1 flex flex-col gap-unit px-unit pb-margin-lg">
+<div class="flex justify-between py-unit px-margin-sm text-outline font-code-sm text-code-sm border-b border-outline-variant">
+<span>SYM</span>
+<div class="flex gap-margin-lg w-1/2 justify-end">
+<span class="w-16 text-right">LTP</span>
+<span class="w-20 text-right">%CHG</span>
+</div>
+</div>
+<!-- List Item 1: Gain -->
+<div class="flex justify-between items-center p-margin-sm border border-primary-fixed bg-surface-container-lowest hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors cursor-pointer group">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-tertiary group-hover:text-on-primary-fixed">QNTM</span>
+<span class="font-code-sm text-code-sm text-outline group-hover:text-on-primary-fixed/70">Quantum Corp</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-body-lg text-body-lg text-tertiary group-hover:text-on-primary-fixed">142.85</span>
+<div class="flex items-center text-secondary-fixed bg-[#000000] px-1 border border-secondary-fixed group-hover:border-on-primary-fixed">
+<span class="font-code-sm text-code-sm">+2.45%</span>
+</div>
+</div>
+</div>
+<!-- List Item 2: Loss -->
+<div class="flex justify-between items-center p-margin-sm border border-primary-fixed bg-surface-container-lowest hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors cursor-pointer group">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-tertiary group-hover:text-on-primary-fixed">NXUS</span>
+<span class="font-code-sm text-code-sm text-outline group-hover:text-on-primary-fixed/70">Nexus Dynamics</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-body-lg text-body-lg text-tertiary group-hover:text-on-primary-fixed">89.12</span>
+<div class="flex items-center text-error bg-[#000000] px-1 border border-error group-hover:border-on-primary-fixed">
+<span class="font-code-sm text-code-sm">-1.15%</span>
+</div>
+</div>
+</div>
+<!-- List Item 3: Gain -->
+<div class="flex justify-between items-center p-margin-sm border border-primary-fixed bg-surface-container-lowest hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors cursor-pointer group">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-tertiary group-hover:text-on-primary-fixed">AERO</span>
+<span class="font-code-sm text-code-sm text-outline group-hover:text-on-primary-fixed/70">Aerospace Ind.</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-body-lg text-body-lg text-tertiary group-hover:text-on-primary-fixed">215.40</span>
+<div class="flex items-center text-secondary-fixed bg-[#000000] px-1 border border-secondary-fixed group-hover:border-on-primary-fixed">
+<span class="font-code-sm text-code-sm">+0.88%</span>
+</div>
+</div>
+</div>
+<!-- List Item 4: Loss -->
+<div class="flex justify-between items-center p-margin-sm border border-primary-fixed bg-surface-container-lowest hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors cursor-pointer group">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-tertiary group-hover:text-on-primary-fixed">VLCT</span>
+<span class="font-code-sm text-code-sm text-outline group-hover:text-on-primary-fixed/70">Velocity Systems</span>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-body-lg text-body-lg text-tertiary group-hover:text-on-primary-fixed">12.05</span>
+<div class="flex items-center text-error bg-[#000000] px-1 border border-error group-hover:border-on-primary-fixed">
+<span class="font-code-sm text-code-sm">-4.20%</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Mobile mapped from SideNavBar JSON) -->
+<nav class="w-full h-16 bg-background dark:bg-background flex items-stretch justify-around border-t border-primary-fixed shrink-0 pb-safe z-50">
+<!-- Active Tab: Monitor (Maps to Watchlist intent) -->
+<div class="flex flex-col items-center justify-center w-full h-full cursor-pointer border-l-2 border-secondary-container text-tertiary bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="monitoring" data-weight="fill" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<span class="font-code-sm text-code-sm mt-1">Monitor</span>
+</div>
+<!-- Inactive Tab: Screener -->
+<div class="flex flex-col items-center justify-center w-full h-full cursor-pointer text-outline-variant hover:bg-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span class="font-code-sm text-code-sm mt-1">Screener</span>
+</div>
+<!-- Inactive Tab: Analysis -->
+<div class="flex flex-col items-center justify-center w-full h-full cursor-pointer text-outline-variant hover:bg-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-code-sm text-code-sm mt-1">Analysis</span>
+</div>
+<!-- Inactive Tab: Portfolio -->
+<div class="flex flex-col items-center justify-center w-full h-full cursor-pointer text-outline-variant hover:bg-surface-variant hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-code-sm text-code-sm mt-1">Portfolio</span>
+</div>
+</nav>
+</body></html>

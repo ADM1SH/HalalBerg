@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantum Terminal - Zakat Calc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#FFFFFF",
+                        "surface-variant": "#000000",
+                        "surface-container-low": "#000000",
+                        "on-surface": "#FFFFFF",
+                        "tertiary-fixed-dim": "#00FFFF",
+                        "on-surface-variant": "#FFFFFF",
+                        "secondary-fixed": "#000000",
+                        "on-secondary-fixed": "#FFFFFF",
+                        "on-tertiary-fixed-variant": "#00FFFF",
+                        "on-tertiary": "#FFFFFF",
+                        "on-primary": "#000000",
+                        "secondary-container": "#000000",
+                        "outline": "#00FFFF",
+                        "inverse-surface": "#000000",
+                        "primary-container": "#000000",
+                        "on-primary-fixed-variant": "#FFFFFF",
+                        "secondary-fixed-dim": "#000000",
+                        "surface-container": "#000000",
+                        "primary-fixed": "#000000",
+                        "outline-variant": "#00FFFF",
+                        "inverse-primary": "#FFFFFF",
+                        "surface-container-high": "#000000",
+                        "tertiary": "#00FFFF",
+                        "surface": "#000000",
+                        "surface-bright": "#000000",
+                        "background": "#000000",
+                        "inverse-on-surface": "#FFFFFF",
+                        "error-container": "#000000",
+                        "tertiary-container": "#000000",
+                        "on-secondary": "#FFFFFF",
+                        "error": "#FF0000",
+                        "secondary": "#FFFFFF",
+                        "on-primary-fixed": "#FFFFFF",
+                        "surface-container-highest": "#000000",
+                        "on-error-container": "#FFFFFF",
+                        "surface-tint": "#000000",
+                        "primary-fixed-dim": "#000000",
+                        "surface-container-lowest": "#000000",
+                        "on-error": "#FFFFFF",
+                        "on-secondary-container": "#FFFFFF",
+                        "on-primary-container": "#FFFFFF",
+                        "surface-dim": "#000000",
+                        "on-secondary-fixed-variant": "#FFFFFF",
+                        "on-background": "#FFFFFF",
+                        "on-tertiary-container": "#FFFFFF",
+                        "tertiary-fixed": "#00FFFF",
+                        "on-tertiary-fixed": "#FFFFFF"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "spacing": {
+                        "stack-compact": "4px",
+                        "gutter": "1px",
+                        "unit": "4px",
+                        "edge-margin": "0px",
+                        "stack-default": "12px",
+                        "container-padding": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["JetBrains Mono", "monospace"],
+                        "ticker-sm": ["JetBrains Mono", "monospace"],
+                        "data-tabular": ["JetBrains Mono", "monospace"],
+                        "body-sm": ["JetBrains Mono", "monospace"],
+                        "label-xs": ["JetBrains Mono", "monospace"],
+                        "headline-md": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "ticker-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "data-tabular": ["13px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "label-xs": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Custom thin scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00FFFF;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00FFFF;
+        }
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background h-screen w-screen overflow-hidden flex flex-col font-body-sm">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-4 w-full h-12 bg-surface border-b border-outline-variant shrink-0 z-10 hidden md:flex">
+<div class="flex items-center gap-6">
+<h1 class="font-display-lg text-display-lg text-primary uppercase tracking-tighter">Quantum Terminal</h1>
+<nav class="flex h-12 items-end">
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors cursor-pointer active:opacity-80 px-4 py-3 h-full flex items-center" href="#">Compliance</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors cursor-pointer active:opacity-80 px-4 py-3 h-full flex items-center" href="#">Charts</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors cursor-pointer active:opacity-80 px-4 py-3 h-full flex items-center" href="#">Analysis</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-container-high transition-colors cursor-pointer active:opacity-80 px-4 py-3 h-full flex items-center" href="#">Portfolio</a>
+<a class="text-primary border-b-[1px] border-outline-variant pb-2 font-body-sm text-body-sm hover:bg-surface-container-high transition-colors cursor-pointer active:opacity-80 px-4 pt-3 h-full flex items-center" href="#">Zakat</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="h-screen w-16 flex flex-col justify-between py-4 bg-surface-container-lowest dark:bg-surface-container-lowest border-r border-outline-variant shrink-0 z-10 hidden md:flex">
+<nav class="flex flex-col gap-2 w-full">
+<a class="flex flex-col items-center justify-center p-2 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-75 w-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1">terminal</span>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-[9px] text-center">Terminal</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-75 w-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1">verified_user</span>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-[9px] text-center">Shariah Audit</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-75 w-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1">grid_view</span>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-[9px] text-center">Market Map</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-75 w-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1">pie_chart</span>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-[9px] text-center">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 bg-surface-container-high text-primary border-r-[1px] border-outline-variant transition-all duration-75 w-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1 text-tertiary dark:text-tertiary">calculate</span>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-[9px] text-center text-tertiary dark:text-tertiary">Zakat Calc</span>
+</a>
+</nav>
+<div class="flex flex-col gap-2 w-full">
+<a class="flex flex-col items-center justify-center p-2 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-75 w-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1">help</span>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-[9px] text-center">Support</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-75 w-full" href="#">
+<span class="material-symbols-outlined text-[24px] mb-1">description</span>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-[9px] text-center">Logs</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area (Edge-to-edge Grid) -->
+<main class="flex-1 overflow-auto bg-surface-dim p-gutter relative grid grid-cols-12 grid-rows-6 gap-gutter border-l border-outline-variant">
+<!-- Header Panel -->
+<div class="col-span-12 row-span-1 bg-surface-container flex items-center justify-between p-container-padding px-6 border-b border-outline-variant">
+<div class="flex items-center gap-8">
+<div>
+<div class="font-label-xs text-label-xs text-on-surface-variant mb-1">ASSET</div>
+<div class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+                            AAPL <span class="text-tertiary text-sm">●</span> Apple Inc.
+                        </div>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div>
+<div class="font-label-xs text-label-xs text-on-surface-variant mb-1">DIVIDEND PER SHARE (DPS)</div>
+<div class="font-data-tabular text-data-tabular text-on-surface">$0.24</div>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div>
+<div class="font-label-xs text-label-xs text-on-surface-variant mb-1">DECLARED YIELD</div>
+<div class="font-data-tabular text-data-tabular text-on-surface">0.52%</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="text-right">
+<div class="font-label-xs text-label-xs text-on-surface-variant mb-1">CALCULATION MODE</div>
+<div class="font-data-tabular text-data-tabular text-primary border border-outline-variant px-2 py-1 bg-surface">Q3 2023 - PURIFICATION</div>
+</div>
+</div>
+</div>
+<!-- Analysis Grid -->
+<div class="col-span-12 md:col-span-8 row-span-5 bg-surface-container flex flex-col p-container-padding border-r border-outline-variant">
+<div class="flex justify-between items-center mb-stack-default border-b border-outline-variant pb-2">
+<h2 class="font-data-tabular text-data-tabular text-primary uppercase tracking-wider">Revenue Analysis (Last 4 Quarters)</h2>
+<span class="font-label-xs text-label-xs text-on-surface-variant bg-surface px-2 py-1 border border-outline-variant">USD Millions</span>
+</div>
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="font-label-xs text-label-xs text-on-surface-variant border-b border-outline-variant">
+<th class="py-2 px-2 font-normal">PERIOD</th>
+<th class="py-2 px-2 font-normal text-right">TOTAL REVENUE</th>
+<th class="py-2 px-2 font-normal text-right">PERMISSIBLE</th>
+<th class="py-2 px-2 font-normal text-right">NON-PERMISSIBLE (NP)</th>
+<th class="py-2 px-2 font-normal text-right text-tertiary">PURIFICATION RATIO</th>
+</tr>
+</thead>
+<tbody class="font-data-tabular text-data-tabular text-on-surface">
+<tr class="border-b border-outline-variant hover:bg-surface-container-high">
+<td class="py-3 px-2">Q3 '23</td>
+<td class="py-3 px-2 text-right">89,498</td>
+<td class="py-3 px-2 text-right">88,155</td>
+<td class="py-3 px-2 text-right text-error">1,343</td>
+<td class="py-3 px-2 text-right text-tertiary">1.50%</td>
+</tr>
+<tr class="border-b border-outline-variant bg-surface hover:bg-surface-container-high">
+<td class="py-3 px-2">Q2 '23</td>
+<td class="py-3 px-2 text-right">81,797</td>
+<td class="py-3 px-2 text-right">80,652</td>
+<td class="py-3 px-2 text-right text-error">1,145</td>
+<td class="py-3 px-2 text-right text-tertiary">1.40%</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-high">
+<td class="py-3 px-2">Q1 '23</td>
+<td class="py-3 px-2 text-right">94,836</td>
+<td class="py-3 px-2 text-right">93,318</td>
+<td class="py-3 px-2 text-right text-error">1,518</td>
+<td class="py-3 px-2 text-right text-tertiary">1.60%</td>
+</tr>
+<tr class="border-b border-outline-variant bg-surface hover:bg-surface-container-high">
+<td class="py-3 px-2">Q4 '22</td>
+<td class="py-3 px-2 text-right">117,154</td>
+<td class="py-3 px-2 text-right">115,280</td>
+<td class="py-3 px-2 text-right text-error">1,874</td>
+<td class="py-3 px-2 text-right text-tertiary">1.60%</td>
+</tr>
+</tbody>
+<tfoot class="border-t border-outline-variant font-headline-md text-headline-md">
+<tr>
+<td class="py-4 px-2 text-primary">AVERAGE (TTM)</td>
+<td colspan="3"></td>
+<td class="py-4 px-2 text-right text-tertiary">1.525%</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<!-- Calculator Panel & Result -->
+<div class="col-span-12 md:col-span-4 row-span-5 bg-surface-container flex flex-col">
+<!-- Input Area -->
+<div class="p-6 border-b border-outline-variant">
+<h2 class="font-data-tabular text-data-tabular text-primary uppercase tracking-wider mb-stack-default">Purification Engine</h2>
+<div class="mb-6">
+<label class="block font-label-xs text-label-xs text-on-surface-variant mb-2">NUMBER OF SHARES HELD (SNAPSHOT DATE)</label>
+<input class="w-full bg-surface border border-outline-variant text-primary font-ticker-sm text-ticker-sm p-3 focus:outline-none focus:border-tertiary transition-colors" placeholder="0" type="text" value="1,500"/>
+</div>
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-xs text-label-xs text-on-surface-variant">TOTAL DIVIDEND RECEIVED</span>
+<span class="font-data-tabular text-data-tabular text-on-surface">$360.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-xs text-label-xs text-on-surface-variant">APPLIED PURIFICATION RATIO</span>
+<span class="font-data-tabular text-data-tabular text-tertiary">1.525%</span>
+</div>
+</div>
+<!-- Result Card -->
+<div class="flex-1 bg-surface-container-high p-6 flex flex-col justify-center items-center text-center">
+<div class="font-label-xs text-label-xs text-error mb-2 uppercase tracking-widest border border-error px-3 py-1 bg-surface">Non-Permissible Amount</div>
+<div class="font-display-lg text-[48px] leading-[56px] font-bold text-primary mb-1 tracking-tighter">
+                        $5.49
+                    </div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mb-8">Amount required to be donated/purified.</div>
+<button class="w-full bg-surface text-primary border border-outline-variant font-data-tabular text-data-tabular py-3 hover:bg-outline-variant hover:text-black transition-colors uppercase tracking-wider font-bold">
+                        Initiate Purification
+                    </button>
+</div>
+</div>
+<!-- Command Input (CLI) -->
+<div class="col-span-12 bg-surface-container flex items-center p-2 absolute bottom-0 left-0 w-full z-20 border-t border-outline-variant">
+<span class="text-tertiary font-ticker-sm text-ticker-sm mr-2">SYS&gt;</span>
+<input class="bg-transparent border-none text-on-surface font-ticker-sm text-ticker-sm w-full focus:outline-none focus:ring-0 placeholder-on-surface-variant" placeholder="/calc AAPL --shares=1500" type="text"/>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 bg-surface-container border-t border-outline-variant md:hidden pb-[32px] pt-2 box-content">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 active:bg-surface-container-highest touch-manipulation" href="#">
+<span class="material-symbols-outlined mb-1">trending_up</span>
+<span class="font-label-xs text-label-xs">Markets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 active:bg-surface-container-highest touch-manipulation" href="#">
+<span class="material-symbols-outlined mb-1">gavel</span>
+<span class="font-label-xs text-label-xs">Compliance</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 active:bg-surface-container-highest touch-manipulation" href="#">
+<span class="material-symbols-outlined mb-1">show_chart</span>
+<span class="font-label-xs text-label-xs">Charts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 active:bg-surface-container-highest touch-manipulation" href="#">
+<span class="material-symbols-outlined mb-1">account_balance</span>
+<span class="font-label-xs text-label-xs">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container p-1 active:bg-surface-container-highest touch-manipulation" href="#">
+<span class="material-symbols-outlined mb-1">payments</span>
+<span class="font-label-xs text-label-xs">Zakat</span>
+</a>
+</nav>
+</div>
+</body></html>
