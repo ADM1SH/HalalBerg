@@ -1,1 +1,0 @@
-"""HalalBurg halalburg package."""
