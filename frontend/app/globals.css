@@ -1,31 +1,31 @@
 @import "tailwindcss";
 
 /*
- * HalalBurg Terminal — "Deep Navy" design system.
+ * HalalBurg Terminal — "Brutalist Terminal" design system (Stitch export).
  * Tailwind v4 is CSS-first: these custom properties become utilities
  * automatically (--color-primary -> bg-primary/text-primary/border-primary).
  * Never reach for generic gray-800/blue-500 — use these semantic tokens.
  */
 :root {
-  --color-background: #05070a;
-  --color-surface: #0b1220;
-  --color-surface-container-lowest: #060a12;
-  --color-surface-container: #101a2c;
-  --color-surface-container-high: #16223a;
+  --color-background: #000000;
+  --color-surface: #000000;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container: #1b1c1c;
+  --color-surface-container-high: #2a2a2a;
 
-  --color-primary: #22d3ee;
-  --color-primary-dim: #0e7490;
-  --color-secondary: #f5a623;
-  --color-secondary-dim: #92620f;
+  --color-primary: #eaffde;
+  --color-primary-dim: #a8d99a;
+  --color-secondary: #ffba20;
+  --color-secondary-dim: #b3800a;
 
-  --color-on-surface: #e6e9ee;
-  --color-on-surface-dim: #aab3c2;
-  --color-outline: #2a3547;
-  --color-outline-variant: #182130;
+  --color-on-surface: #e4e2e1;
+  --color-on-surface-dim: #84967c;
+  --color-outline: #333333;
+  --color-outline-variant: #222222;
 
-  --color-trade-up: #22c55e;
-  --color-trade-down: #ef4444;
-  --color-trade-neutral: #aab3c2;
+  --color-trade-up: #00ff00;
+  --color-trade-down: #ff0000;
+  --color-trade-neutral: #84967c;
 }
 
 @theme inline {
@@ -49,8 +49,8 @@
   --color-trade-down: var(--color-trade-down);
   --color-trade-neutral: var(--color-trade-neutral);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-jetbrains-mono);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 html,
@@ -61,26 +61,26 @@ body {
 body {
   background: var(--color-background);
   color: var(--color-on-surface);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-monospace, monospace;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-outline) transparent;
+  scrollbar-color: #00fbfb transparent;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-outline);
-  border-radius: 4px;
+  background-color: #00fbfb;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--color-outline-variant);
 }
 
 .terminal-grid {
@@ -95,4 +95,18 @@ body {
 .tabular {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
 }
