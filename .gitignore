@@ -16,4 +16,4 @@ frontend/.env.local
 frontend/next-env.d.ts
 
 # Editors
-.claude/settings.local.json
+.claude/
