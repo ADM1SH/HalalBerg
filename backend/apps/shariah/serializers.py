@@ -39,4 +39,5 @@ class ScreenerRowSerializer(serializers.ModelSerializer):
             "status",
             "debt_to_market_cap",
             "non_compliant_income_ratio",
+            "notes",
         ]

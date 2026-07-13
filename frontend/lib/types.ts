@@ -128,4 +128,5 @@ export interface ScreenerRow {
   status: "compliant" | "non_compliant" | "questionable";
   debt_to_market_cap: number;
   non_compliant_income_ratio: number;
+  notes: string;
 }

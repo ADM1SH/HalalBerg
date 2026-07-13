@@ -9,12 +9,12 @@ from concurrent.futures import ThreadPoolExecutor
 from django.utils import timezone
 
 from .models import Quote
-from .providers import finnhub_profile, finnhub_quote, yahoo_daily_closes
+from .providers import PROFILE_CACHE_SECONDS, finnhub_profile, finnhub_quote, yahoo_daily_closes
 from .symbols import SYMBOLS
 
 logger = logging.getLogger(__name__)
 
-QUOTE_STALE_SECONDS = 60
+QUOTE_STALE_SECONDS = PROFILE_CACHE_SECONDS
 
 
 def quotes_are_stale() -> bool:

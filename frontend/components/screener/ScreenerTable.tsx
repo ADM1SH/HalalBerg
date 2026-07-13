@@ -26,6 +26,7 @@ export function ScreenerTable({ rows }: { rows: ScreenerRow[] }) {
           <th className="px-3 py-1.5 text-right font-medium">Debt/Cap</th>
           <th className="px-3 py-1.5 text-right font-medium">Non-Compl Inc</th>
           <th className="px-3 py-1.5 text-left font-medium">Status</th>
+          <th className="px-3 py-1.5 text-left font-medium">Why</th>
         </tr>
       </thead>
       <tbody>
@@ -58,6 +59,9 @@ export function ScreenerTable({ rows }: { rows: ScreenerRow[] }) {
             </td>
             <td className={`px-3 py-1.5 font-medium ${STATUS_STYLE[r.status]}`}>
               {STATUS_LABEL[r.status]}
+            </td>
+            <td title={r.notes} className="px-3 py-1.5 text-on-surface-dim">
+              <div className="max-w-48 truncate">{r.notes}</div>
             </td>
           </tr>
         ))}

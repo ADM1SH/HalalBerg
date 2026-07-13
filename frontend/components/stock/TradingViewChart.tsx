@@ -21,6 +21,16 @@ const EXCHANGE_BY_SYMBOL: Record<string, string> = {
   PFE: "NYSE",
   V: "NYSE",
   PG: "NYSE",
+  META: "NASDAQ",
+  NFLX: "NASDAQ",
+  INTC: "NASDAQ",
+  CMCSA: "NASDAQ",
+  WMT: "NYSE",
+  HD: "NYSE",
+  NKE: "NYSE",
+  CAT: "NYSE",
+  MS: "NYSE",
+  T: "NYSE",
 };
 
 export function TradingViewChart({ symbol }: { symbol: string }) {
